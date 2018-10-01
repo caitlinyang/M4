@@ -23,5 +23,12 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button registrationPageButton = (Button) findViewById(R.id.registerButton);
+        registrationPageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

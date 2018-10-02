@@ -60,16 +60,6 @@ public class RegistrationActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 if (userName.getText().toString().trim().equals("")) {
-//                    AlertDialog alertDialog = new AlertDialog.Builder(RegistrationActivity.this).create();
-//                    alertDialog.setTitle("User's name is not entered");
-//                    alertDialog.setMessage("Please enter full name");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
                     Toast.makeText(getApplicationContext(), "Please enter a full name",Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -93,7 +83,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
                 dataBase.getUserList().add(newUser);
 
-                Intent main = new Intent(getBaseContext(), ApplicationActivity.class);
+                Intent main = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 startActivity(main);
             }
         });

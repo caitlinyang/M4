@@ -9,10 +9,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.caitlinyang.m4.R;
+import com.example.caitlinyang.m4.model.DataBase;
+import com.example.caitlinyang.m4.model.User;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
+    EditText userEmail;
+    EditText userPassword;
+    DataBase userdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +28,19 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.passwordInput);
         Button loginButton = (Button) findViewById(R.id.loginAccess);
 
+        userEmail = (EditText) findViewById(R.id.registration_email);
+        userPassword = (EditText) findViewById(R.id.registrationpassword);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.getText().toString().trim().toLowerCase().equals("user") && password.getText().toString().equals("pass")) {
-                    Intent main = new Intent(getBaseContext(), ApplicationActivity.class);
-                    startActivity(main);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+                for (Object u : userdata.getUserList()) {
+                    if(username.getText().toString().trim().toLowerCase().equals(((User) u).getEmail()) && password.getText().toString().equals(((User) u).getPassword())) {
+                        Intent main = new Intent(getBaseContext(), ApplicationActivity.class);
+                        startActivity(main);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

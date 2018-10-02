@@ -1,7 +1,14 @@
 package com.example.caitlinyang.m4.model;
 
-
 public class User {
+    /**
+     * allow us to assign unique id numbers to each student
+     */
+    private static int Next_Id = 0;
+
+
+    private int id;
+
     private String name;
     private String email;
     private String password;
@@ -39,15 +46,18 @@ public class User {
         this.userType = userType;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
+
     public User(String name, String email, String password, String userType) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.userType = userType;
+        this.id = User.Next_Id++;
     }
 
-    public User(String name, String email, String password) {
-        this(name, email, password, "User");
-    }
 
 }

@@ -1,10 +1,14 @@
-package com.example.caitlinyang.m4;
+package com.example.caitlinyang.m4.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.caitlinyang.m4.R;
+import com.example.caitlinyang.m4.controllers.LoginActivity;
+import com.example.caitlinyang.m4.controllers.RegistrationActivity;
 
 
 public class WelcomeScreenActivity extends AppCompatActivity {

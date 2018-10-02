@@ -1,6 +1,5 @@
-package com.example.caitlinyang.m4;
+package com.example.caitlinyang.m4.controllers;
 
-import android.graphics.Color;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.TextView;
+
+import com.example.caitlinyang.m4.R;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username;

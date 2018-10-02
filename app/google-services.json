@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "103222277342",
+    "firebase_url": "https://donation-tracker-91ad0.firebaseio.com",
+    "project_id": "donation-tracker-91ad0",
+    "storage_bucket": "donation-tracker-91ad0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103222277342:android:7b8ebcc4c396add4",
+        "android_client_info": {
+          "package_name": "com.example.caitlinyang.m4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103222277342-ua220gcjb7pak4p5df09afng4i57kld1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARFsSjq-4pLSfUQJOFvQ0MmCCuv1T3jvE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

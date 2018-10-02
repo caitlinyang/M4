@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/regrationuser"
+        android:id="@+id/registrationfullname"
         android:layout_width="270dp"
         android:layout_height="44dp"
         android:layout_marginEnd="57dp"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/registratonuserid"
+        android:id="@+id/registration_email"
         android:layout_width="270dp"
         android:layout_height="44dp"
         android:layout_marginEnd="57dp"
@@ -81,7 +81,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regrationuser" />
+        app:layout_constraintTop_toBottomOf="@+id/registrationfullname" />
 
     <TextView
         android:id="@+id/textView11"
@@ -95,7 +95,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registratonuserid" />
+        app:layout_constraintTop_toBottomOf="@+id/registration_email" />
 
     <EditText
         android:id="@+id/registrationpassword"

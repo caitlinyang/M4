@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.DataBase;
@@ -57,45 +58,29 @@ public class RegistrationActivity extends AppCompatActivity{
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (userName == null) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(RegistrationActivity.this).create();
-                    alertDialog.setTitle("User's name is not entered");
-                    alertDialog.setMessage("Please enter full name");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
+
+                if (userName.getText().toString().trim().equals("")) {
+//                    AlertDialog alertDialog = new AlertDialog.Builder(RegistrationActivity.this).create();
+//                    alertDialog.setTitle("User's name is not entered");
+//                    alertDialog.setMessage("Please enter full name");
+//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.dismiss();
+//                                }
+//                            });
+//                    alertDialog.show();
+                    Toast.makeText(getApplicationContext(), "Please enter a full name",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (userEmail == null) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(RegistrationActivity.this).create();
-                    alertDialog.setTitle("User's email is not entered");
-                    alertDialog.setMessage("Please enter email");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
+                if (userEmail.getText().toString().trim().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter an email",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (userPassword == null) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(RegistrationActivity.this).create();
-                    alertDialog.setTitle("User's password is not entered");
-                    alertDialog.setMessage("Please enter password");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
+                if (userPassword.getText().toString().trim().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter a password",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -107,6 +92,9 @@ public class RegistrationActivity extends AppCompatActivity{
                 User newUser = new User(name, email, password, userType);
 
                 dataBase.getUserList().add(newUser);
+
+                Intent main = new Intent(getBaseContext(), ApplicationActivity.class);
+                startActivity(main);
             }
         });
     }

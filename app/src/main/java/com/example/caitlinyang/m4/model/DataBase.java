@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DataBase {
 
-    private List<User> userList;
+    private static List<User> userList;
 
 
     public List getUserList() {

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.DataBase;
+import com.example.caitlinyang.m4.model.DatabaseSingleton;
 import com.example.caitlinyang.m4.model.User;
 
 import java.util.Arrays;
@@ -21,7 +22,6 @@ import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity{
 
-    private DataBase dataBase= new DataBase();
     private Spinner userTypeSpinner;
     private Button submitButton;
     private Button cancelButton;
@@ -81,7 +81,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
                 User newUser = new User(name, email, password, userType);
 
-                dataBase.getUserList().add(newUser);
+                DatabaseSingleton.getInstance().getDb().getUserList().add(newUser);
 
                 Intent main = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 startActivity(main);

@@ -9,15 +9,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.caitlinyang.m4.R;
-import com.example.caitlinyang.m4.model.DataBase;
 import com.example.caitlinyang.m4.model.User;
+import com.example.caitlinyang.m4.model.DatabaseSingleton;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     EditText userEmail;
     EditText userPassword;
-    DataBase userdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +33,19 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (Object u : userdata.getUserList()) {
+                boolean found = false;
+                for (Object u : DatabaseSingleton.getInstance().getDb().getUserList()) {
                     if(username.getText().toString().trim().toLowerCase().equals(((User) u).getEmail()) && password.getText().toString().equals(((User) u).getPassword())) {
                         Intent main = new Intent(getBaseContext(), ApplicationActivity.class);
                         startActivity(main);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+                        found = true;
                     }
                 }
+                if (!found) {
+                    Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
         // Cancel Button goes back to the welcome screen if cancel is hit

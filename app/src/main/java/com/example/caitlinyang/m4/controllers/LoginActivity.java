@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 boolean found = false;
                 for (Object u : DatabaseSingleton.getInstance().getDb().getUserList()) {
                     if(username.getText().toString().trim().toLowerCase().equals(((User) u).getEmail()) && password.getText().toString().equals(((User) u).getPassword())) {
-                        Intent main = new Intent(getBaseContext(), ApplicationActivity.class);
+                        Intent main = new Intent(getBaseContext(), HomeScreenActivity.class);
                         startActivity(main);
                         found = true;
                     }
@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (!found) {
                     Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
                 }
+
 
 
             }

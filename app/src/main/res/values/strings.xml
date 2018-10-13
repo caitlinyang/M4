@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DONATION TRACKER</string>
+    <string name="view">View</string>
+    <string name="locations">Locations</string>
 </resources>

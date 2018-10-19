@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_view_locEmployee"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.LocEmployeeActivity">
+
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="490dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/welcomeLocEmployee"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/groupbackground">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Location Employee"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view_locEmployee"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:itemTextColor="@color/darkgray"
+        app:itemIconTint="@color/darkgray"
+        app:menu="@menu/loc_employee_drawer"
+        app:headerLayout="@layout/header"
+        android:layout_gravity="start">
+
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

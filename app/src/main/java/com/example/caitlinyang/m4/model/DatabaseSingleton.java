@@ -2,6 +2,7 @@ package com.example.caitlinyang.m4.model;
 
 public class DatabaseSingleton {
     private static final DatabaseSingleton ourInstance = new DatabaseSingleton();
+    private User currentUser;
 
     public static DatabaseSingleton getInstance() {
         return ourInstance;
@@ -19,5 +20,12 @@ public class DatabaseSingleton {
 
     public void setDb(DataBase db) {
         this.db = db;
+    }
+
+    public void setCurrentUser(User user) {
+        currentUser = user;
+    }
+    public User getCurrentUser() {
+        return currentUser;
     }
 }

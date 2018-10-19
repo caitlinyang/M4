@@ -1,9 +1,15 @@
 package com.example.caitlinyang.m4.controllers;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,14 +31,27 @@ import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Locations;
 import com.example.caitlinyang.m4.model.SimpleModel;
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class LocationScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
+
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_view2);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        NavigationView navigationView = findViewById(R.id.nav_view2);
+        navigationView.setNavigationItemSelectedListener(this);
         
         readLocationData();
 
@@ -52,23 +71,34 @@ public class HomeScreenActivity extends AppCompatActivity {
                             instanceLoc.getAddress(), instanceLoc.getLocationType(),
                             instanceLoc.getPhoneNumber());
                 }
+                onViewButtonPressed();
             }
         });
 
-        Button viewLocations = (Button) findViewById(R.id.viewButton);
-        viewLocations.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!listView.isSelected()) {
-                    Toast.makeText(getApplicationContext(), "Please select a location,",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    onViewButtonPressed();
-                }
-            }
-        });
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.hp:
+                Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
+                startActivity(main);
+                break;
+            case R.id.loclist:
+                Intent main2 = new Intent(getBaseContext(), LocationScreenActivity.class);
+                startActivity(main2);
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     class CustomAdapter extends BaseAdapter {

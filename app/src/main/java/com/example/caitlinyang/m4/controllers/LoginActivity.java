@@ -36,8 +36,15 @@ public class LoginActivity extends AppCompatActivity {
                 boolean found = false;
                 for (Object u : DatabaseSingleton.getInstance().getDb().getUserList()) {
                     if(username.getText().toString().trim().toLowerCase().equals(((User) u).getEmail()) && password.getText().toString().equals(((User) u).getPassword())) {
-                        Intent main = new Intent(getBaseContext(), HomeScreenActivity.class);
-                        startActivity(main);
+                        if (((User) u).getUserType().equals("User")) {
+                            DatabaseSingleton.getInstance().setCurrentUser((User) u);
+                            Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
+                            startActivity(main);
+                        } else if (((User) u).getUserType().equals("Location Employee")) {
+                            DatabaseSingleton.getInstance().setCurrentUser((User) u);
+                            Intent main2 = new Intent(getBaseContext(), LocEmployeeActivity.class);
+                            startActivity(main2);
+                        }
                         found = true;
                     }
                 }

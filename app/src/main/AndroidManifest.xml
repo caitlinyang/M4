@@ -19,8 +19,10 @@
         <activity android:name=".controllers.LoginActivity" />
         <activity android:name=".controllers.ApplicationActivity" />
         <activity android:name=".controllers.RegistrationActivity" />
-        <activity android:name=".controllers.HomeScreenActivity" />
-        <activity android:name=".controllers.LocationActivity"></activity>
+        <activity android:name=".controllers.LocationScreenActivity" />
+        <activity android:name=".controllers.LocationActivity" />
+        <activity android:name=".controllers.UserHomeActivity" />
+        <activity android:name=".controllers.LocEmployeeActivity"></activity>
     </application>
 
 </manifest>

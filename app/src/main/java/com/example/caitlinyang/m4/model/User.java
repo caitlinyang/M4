@@ -6,7 +6,6 @@ public class User {
      */
     private static int Next_Id = 0;
 
-
     private int id;
 
     private String name;

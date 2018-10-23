@@ -28,6 +28,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.caitlinyang.m4.R;
+import com.example.caitlinyang.m4.model.DatabaseSingleton;
+import com.example.caitlinyang.m4.model.Item;
 import com.example.caitlinyang.m4.model.Locations;
 import com.example.caitlinyang.m4.model.SimpleModel;
 
@@ -65,6 +67,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
                 listView.setSelected(true);
                 Log.d("KMyAct", "" + position);
                 Locations instanceLoc = SimpleModel.getInstance().getItems().get(position);
+                SimpleModel.getInstance().setPositionTracker(position);
                 if (instanceLoc != null) {
                     Locations.getInstance().addAttributes(instanceLoc.getLocationName(),
                             instanceLoc.getLongitude(), instanceLoc.getLatitude(),
@@ -81,7 +84,12 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.hp:
-                Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
+                Intent main = null;
+                if (DatabaseSingleton.getInstance().getCurrentUser().getUserType().equals("User")) {
+                    main = new Intent(getBaseContext(), UserHomeActivity.class);
+                } else if (DatabaseSingleton.getInstance().getCurrentUser().getUserType().equals("Location Employee")) {
+                    main = new Intent(getBaseContext(), LocEmployeeActivity.class);
+                }
                 startActivity(main);
                 break;
             case R.id.loclist:
@@ -135,7 +143,12 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
     }
 
     public void onViewButtonPressed() {
-        Intent intent = new Intent(this, LocationActivity.class);
+        Intent intent = null;
+        if (DatabaseSingleton.getInstance().getCurrentUser().getUserType().equals("Location Employee")) {
+            intent = new Intent(this, LocEmployeeLocationsActivity.class);
+        } else if (DatabaseSingleton.getInstance().getCurrentUser().getUserType().equals("User")) {
+            intent = new Intent(this, LocationActivity.class);
+        }
         startActivity(intent);
     }
 

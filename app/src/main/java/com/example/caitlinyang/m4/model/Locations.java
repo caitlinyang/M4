@@ -1,5 +1,8 @@
 package com.example.caitlinyang.m4.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Locations {
     public static final Locations SPEC_LOCATION = new Locations();
 
@@ -9,6 +12,10 @@ public class Locations {
     private double latitude;
     private String address;
     private String phoneNumber;
+
+    private static int itemTracker = 0;
+
+    private List<Item> listOfItems;
 
     private int key;
 
@@ -24,11 +31,17 @@ public class Locations {
         this.latitude = latitude;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        listOfItems = new ArrayList<>();
     }
 
     public static Locations getInstance() {
         return SPEC_LOCATION;
     }
+
+    public void addItemToList(Item item) {
+        listOfItems.add(item);
+    }
+    public List<Item> getListOfItems() { return listOfItems; }
 
     public void addAttributes(String locationName, double longitude, double latitude,
                               String address, String locationType, String phoneNumber) {
@@ -39,6 +52,8 @@ public class Locations {
         SPEC_LOCATION.locationType = locationType;
         SPEC_LOCATION.phoneNumber = phoneNumber;
     }
+
+    public int getItemTracker() { return itemTracker; }
 
     public int getKey() {
         return key;

@@ -40,12 +40,12 @@ public class LocEmployeeActivity extends AppCompatActivity implements Navigation
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.loclist:
+            case R.id.loclist_loc_emp:
                 Intent main = new Intent(getBaseContext(), LocationScreenActivity.class);
                 startActivity(main);
                 break;
-            case R.id.hp:
-                Intent main2 = new Intent(getBaseContext(), UserHomeActivity.class);
+            case R.id.hp_loc_emp:
+                Intent main2 = new Intent(getBaseContext(), LocEmployeeActivity.class);
                 startActivity(main2);
                 break;
         }

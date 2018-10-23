@@ -7,18 +7,28 @@ import java.util.List;
 
 public class SimpleModel {
     public static final SimpleModel INSTANCE = new SimpleModel();
+    private int positionTracker = 0;
 
     private List<Locations> items;
-
+    private List<Item> donations;
     private SimpleModel() {
         items = new ArrayList<>();
+        donations = new ArrayList<>();
     }
 
-    public void addItem(Locations item) { items.add(item); }
+    public void addItem(Locations item) {
+        items.add(item);
+    }
+
+    public void addDonation(Item item) { donations.add(item); }
 
     public List<Locations> getItems() {
         return items;
     }
+    public List<Item> getDonations() { return donations; }
+
+    public int getPositionTracker() { return positionTracker; }
+    public void setPositionTracker(int position) { positionTracker = position; }
 
     public static SimpleModel getInstance() {
         return INSTANCE;

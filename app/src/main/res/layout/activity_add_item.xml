@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.AddItemActivity">
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/item_name_input"
+                android:layout_width="236dp"
+                android:layout_height="44dp"
+                android:layout_alignStart="@+id/time_stamp_input"
+                android:layout_alignTop="@+id/item_name"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newItem" />
+
+            <TextView
+                android:id="@+id/newItem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="36dp"
+                android:text="New Item"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:fontFamily="sans-serif"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="53dp"
+                tools:layout_editor_absoluteY="57dp" />
+
+            <EditText
+                android:id="@+id/time_stamp_input"
+                android:layout_width="236dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/time_stamp"
+                android:layout_marginEnd="11dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newItem" />
+
+            <EditText
+                android:id="@+id/valueInput"
+                android:layout_width="236dp"
+                android:layout_height="44dp"
+                android:layout_alignBaseline="@+id/valueDollars"
+                android:layout_alignStart="@+id/time_stamp_input"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newItem" />
+
+            <TextView
+                android:id="@+id/time_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/valueDollars"
+                android:layout_marginTop="228dp"
+                android:text="Time Stamp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_stamp_input" />
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/time_stamp"
+                android:layout_marginTop="148dp"
+                android:text="Item Name"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_stamp_input" />
+
+            <TextView
+                android:id="@+id/valueDollars"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="210dp"
+                android:layout_toStartOf="@+id/newItem3"
+                android:text="Value ($)"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_stamp_input" />
+
+            <TextView
+                android:id="@+id/categoryDonation"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="130dp"
+                android:layout_toStartOf="@+id/newItem3"
+                android:text="Category"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_stamp_input" />
+
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="253dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/categoryDonation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_stamp_input" />
+            <Button
+                android:id="@+id/nextAddItem"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="22dp"
+                android:layout_marginEnd="34dp"
+                android:text="Next"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:onClick="next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cancelRegistration"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/add_category"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_alignStart="@+id/time_stamp"
+                android:layout_alignTop="@+id/nextAddItem"
+                android:text="ADD A CATEGORY"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/submitItem"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/previous"
+                android:layout_marginEnd="35dp"
+                android:text="Submit"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cancelRegistration"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/previous"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="47dp"
+                android:text="Previous"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:onClick="prev"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cancelRegistration"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/fullDescInput"
+                android:layout_width="361dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/fullDesc"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shortDes" />
+
+            <TextView
+                android:id="@+id/fullDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/shortDesInput"
+                android:layout_marginTop="249dp"
+                android:text="Full Description"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shortDesInput" />
+
+            <EditText
+                android:id="@+id/shortDesInput"
+                android:layout_width="361dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/shortDes"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shortDes" />
+
+            <TextView
+                android:id="@+id/shortDes"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="148dp"
+                android:text="Short Description (for display purposes)"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_stamp_input" />
+
+            <TextView
+                android:id="@+id/newItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="36dp"
+                android:text="New Item"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:fontFamily="sans-serif"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </RelativeLayout>
+
+    </ViewFlipper>
+
+
+
+
+</RelativeLayout>

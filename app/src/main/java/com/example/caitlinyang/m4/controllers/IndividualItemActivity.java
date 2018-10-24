@@ -55,28 +55,22 @@ public class IndividualItemActivity extends AppCompatActivity {
             convertView = getLayoutInflater().inflate(R.layout.individual_item_detailed_information, parent, false);
 
             TextView nameOfItem = (TextView) convertView.findViewById(R.id.textView_ind_item_view_item_name);
-            nameOfItem.setText("Item Name: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getItem_name());
+            nameOfItem.setText("Item Name: " + SimpleModel.getInstance().getDonations().get(SimpleModel.getInstance().getPositionTracker()).getItem_name());
 
             TextView time = (TextView) convertView.findViewById(R.id.textView_ind_item_view_time_stamp);
-            time.setText("Time stamp: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getTime_stamp());
+            time.setText("Time stamp: " + SimpleModel.getInstance().getDonations().get(SimpleModel.getInstance().getPositionTracker()).getTime_stamp());
 
             TextView value = (TextView) convertView.findViewById(R.id.textView_ind_item_view_valueDollars);
-            value.setText("Value: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getValueDollars());
+            value.setText("Value: " + SimpleModel.getInstance().getDonations().get(SimpleModel.getInstance().getPositionTracker()).getValueDollars());
 
             TextView category = (TextView) convertView.findViewById(R.id.textView_ind_item_view_category);
-            category.setText("Category: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getCategory());
+            category.setText("Category: " + SimpleModel.getInstance().getDonations().get(SimpleModel.getInstance().getPositionTracker()).getCategory());
 
             TextView shortDescription = (TextView) convertView.findViewById(R.id.textView_ind_item_view_shortDes);
-            shortDescription.setText("Short Description: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getShortDes());
+            shortDescription.setText("Short Description: " + SimpleModel.getInstance().getDonations().get(SimpleModel.getInstance().getPositionTracker()).getShortDes());
 
             TextView fullDescription = (TextView) convertView.findViewById(R.id.textView_ind_item_view_longDes);
-            fullDescription.setText("Full Description: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getLongDes());
+            fullDescription.setText("Full Description: " + SimpleModel.getInstance().getDonations().get(SimpleModel.getInstance().getPositionTracker()).getLongDes());
 
             return convertView;
         }

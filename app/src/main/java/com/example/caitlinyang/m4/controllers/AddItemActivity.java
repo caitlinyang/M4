@@ -130,6 +130,7 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
                     final String category = categorySpinner.getSelectedItem().toString();
                     final String shortDes = shortDesc.getText().toString();
                     final String fullDes = fullDesc.getText().toString();
+                    SimpleModel.getInstance().addDonation(new Item(loc_name, name, time, value, category, shortDes, fullDes));
                     SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).addItemToList(
                             new Item(loc_name, name, time, value, category, shortDes, fullDes));
                     Log.d("MYACTLOOK", name + " " + time + " " + value);

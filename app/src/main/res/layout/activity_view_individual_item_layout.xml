@@ -2,71 +2,27 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
-        android:id="@+id/textView_ind_item_view_loc_name"
+        android:id="@+id/itemList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="92dp"
-        android:text="TextView" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:text="List of Items"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView_ind_item_view_item_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ListView
+        android:id="@+id/list_individual_items"
+        android:layout_width="match_parent"
+        android:layout_height="417dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp"
-        android:text="TextView" />
+        android:layout_marginTop="104dp">
 
-    <TextView
-        android:id="@+id/textView_ind_item_view_time_stamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="203dp"
-        android:text="TextView" />
+    </ListView>
 
-    <TextView
-        android:id="@+id/textView_ind_item_view_valueDollars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="240dp"
-        android:layout_centerVertical="true"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView_ind_item_view_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView_ind_location_address"
-        android:layout_alignLeft="@+id/textView_ind_location_address"
-        android:layout_marginBottom="220dp"
-        android:text="TextView" />
-
-    <TextView
-        android:textSize="20sp"
-        android:id="@+id/textView_ind_item_view_shortDes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="31dp"
-        android:text="TextView" />
-
-    <TextView
-        android:textSize="20sp"
-        android:id="@+id/textView_ind_item_view_longDes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="31dp"
-        android:text="TextView" />
 </RelativeLayout>

@@ -25,9 +25,9 @@ public class IndividualItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
+        setContentView(R.layout.activity_view_individual_item_layout);
 
-        listView = (ListView) findViewById(R.id.location_information);
+        listView = (ListView) findViewById(R.id.list_individual_items);
         IndividualItemActivity.CustomAdapter customAdapter = new IndividualItemActivity.CustomAdapter();
 
         listView.setAdapter(customAdapter);
@@ -52,29 +52,29 @@ public class IndividualItemActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.individual_item_layout, parent, false);
+            convertView = getLayoutInflater().inflate(R.layout.individual_item_detailed_information, parent, false);
 
-            TextView nameOfItem = (TextView) convertView.findViewById(R.id.individual_item);
+            TextView nameOfItem = (TextView) convertView.findViewById(R.id.textView_ind_item_view_item_name);
             nameOfItem.setText("Item Name: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
                     get(position).getItem_name());
 
-            TextView time = (TextView) convertView.findViewById(R.id.time_donation_came);
+            TextView time = (TextView) convertView.findViewById(R.id.textView_ind_item_view_time_stamp);
             time.setText("Time stamp: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
                     get(position).getTime_stamp());
 
-            TextView value = (TextView) convertView.findViewById(R.id.value_donation_came);
+            TextView value = (TextView) convertView.findViewById(R.id.textView_ind_item_view_valueDollars);
             value.setText("Value: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
                     get(position).getValueDollars());
 
-            TextView category = (TextView) convertView.findViewById(R.id.category_donation_came);
+            TextView category = (TextView) convertView.findViewById(R.id.textView_ind_item_view_category);
             category.setText("Category: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
                     get(position).getCategory());
 
-            TextView shortDescription = (TextView) convertView.findViewById(R.id.shortDes_donation_came);
+            TextView shortDescription = (TextView) convertView.findViewById(R.id.textView_ind_item_view_shortDes);
             shortDescription.setText("Short Description: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
                     get(position).getShortDes());
 
-            TextView fullDescription = (TextView) convertView.findViewById(R.id.fullDes_donation_came);
+            TextView fullDescription = (TextView) convertView.findViewById(R.id.textView_ind_item_view_longDes);
             fullDescription.setText("Full Description: " + SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
                     get(position).getLongDes());
 

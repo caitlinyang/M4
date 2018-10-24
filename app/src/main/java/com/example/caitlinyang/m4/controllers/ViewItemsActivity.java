@@ -1,17 +1,18 @@
 package com.example.caitlinyang.m4.controllers;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.caitlinyang.m4.R;
-import com.example.caitlinyang.m4.model.Locations;
 import com.example.caitlinyang.m4.model.Item;
 import com.example.caitlinyang.m4.model.SimpleModel;
 
@@ -20,16 +21,32 @@ import java.util.List;
 public class ViewItemsActivity extends AppCompatActivity {
 
     private ListView listView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_items);
 
         listView = (ListView) findViewById(R.id.items_list_listView);
-        CustomAdapter customAdapter = new CustomAdapter();
+        CustomAdapter customAdapter1 = new CustomAdapter();
 
-        listView.setAdapter(customAdapter);
+        listView.setAdapter(customAdapter1);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listView.setSelected(true);
+                Log.d("KMyAct", "" + position);
+                Item instanceItem = SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().get(position);
+                SimpleModel.getInstance().setPositionTracker(position);
+
+                if (instanceItem != null) {
+                    instanceItem.getInstance().addAttributes(instanceItem.getLoc_name(),
+                            instanceItem.getItem_name(), instanceItem.getTime_stamp(),
+                            instanceItem.getValueDollars(), instanceItem.getCategory(),
+                            instanceItem.getShortDes(), instanceItem.getLongDes());
+                }
+                onViewButtonPressed();
+            }
+        });
     }
 
     class CustomAdapter extends BaseAdapter {
@@ -83,5 +100,9 @@ public class ViewItemsActivity extends AppCompatActivity {
 
             return convertView;
         }
+    }
+    public void onViewButtonPressed() {
+        Intent intent = new Intent(this, IndividualItemActivity.class);
+        startActivity(intent);
     }
 }

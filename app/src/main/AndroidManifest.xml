@@ -26,6 +26,7 @@
         <activity android:name=".controllers.LocEmployeeLocationsActivity" />
         <activity android:name=".controllers.AddItemActivity" />
         <activity android:name=".controllers.ViewItemsActivity"></activity>
+        <activity android:name=".controllers.IndividualItemActivity"></activity>
     </application>
 
 </manifest>

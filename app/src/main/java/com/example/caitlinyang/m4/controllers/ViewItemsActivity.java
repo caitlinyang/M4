@@ -71,8 +71,6 @@ public class ViewItemsActivity extends AppCompatActivity {
             convertView = getLayoutInflater().inflate(R.layout.individual_item_layout, parent, false);
 
             List<Item> s = SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems();
-            Item i = s.get(0);
-            Log.d("MYACT", i.getItem_name());
 
             TextView nameOfItem = (TextView) convertView.findViewById(R.id.individual_item);
             nameOfItem.setText(SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().

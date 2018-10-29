@@ -62,6 +62,7 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
         switch (item.getItemId()) {
             case R.id.loclist:
                 Intent main = new Intent(getBaseContext(), LocationScreenActivity.class);
+                main.putExtra("key", user);
                 startActivity(main);
                 break;
             case R.id.hp:

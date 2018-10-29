@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
+                Log.d("TEST", data.get("users").toString());
                 users = (HashMap<String, Object>) data.get("users");
             }
 
@@ -53,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

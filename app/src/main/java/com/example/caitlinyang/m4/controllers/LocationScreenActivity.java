@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.DatabaseSingleton;
@@ -47,6 +48,8 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
     private ActionBarDrawerToggle toggle;
     private DatabaseReference mDatabase;
     private HashMap<String, Object> users;
+    private HashMap<String, Object> user;
+    private List<Locations> locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +71,21 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
-                users = (HashMap<String, Object>) data.get("users");
+                locations = new ArrayList<>();
+                DataSnapshot data = dataSnapshot.child("locations");
+                for (DataSnapshot snapshot : data.getChildren()) {
+                    Locations location = snapshot.getValue(Locations.class);
+                    locations.add(location);
+                }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
+        Intent intent = getIntent();
+        if (intent.hasExtra("key")) {
+            user = (HashMap<String, Object>) intent.getSerializableExtra("key");
+        }
         listView = (ListView) findViewById(R.id.locationslist);
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
@@ -105,15 +114,18 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         switch (item.getItemId()) {
             case R.id.hp:
                 Intent main = null;
-                if (DatabaseSingleton.getInstance().getCurrentUser().getUserType().equals("User")) {
+                if (user.get("type").equals("User")) {
                     main = new Intent(getBaseContext(), UserHomeActivity.class);
-                } else if (DatabaseSingleton.getInstance().getCurrentUser().getUserType().equals("Location Employee")) {
+                    main.putExtra("key", user);
+                } else if (user.get("type").equals("Location Employee")) {
                     main = new Intent(getBaseContext(), LocEmployeeActivity.class);
+                    main.putExtra("key", user);
                 }
                 startActivity(main);
                 break;
             case R.id.loclist:
                 Intent main2 = new Intent(getBaseContext(), LocationScreenActivity.class);
+                main2.putExtra("key", user);
                 startActivity(main2);
                 break;
         }
@@ -134,7 +146,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         @Override
         public int getCount() {
             //return SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getItems().size() - 1).getKey();
-            return users.size();
+            return locations.size();
         }
 
         @Override
@@ -155,9 +167,9 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
             TextView address = (TextView) convertView.findViewById(R.id.textView_address);
             TextView phoneNum = (TextView) convertView.findViewById(R.id.textView_phone_number);
 
-            locName.setText(SimpleModel.getInstance().getItems().get(position).getLocationName());
-            address.setText("Address: " + SimpleModel.getInstance().getItems().get(position).getAddress());
-            phoneNum.setText("Phone Number " + SimpleModel.getInstance().getItems().get(position).getPhoneNumber());
+            locName.setText(locations.get(position).getLocationName());
+            address.setText("Address: " + locations.get(position).getAddress());
+            phoneNum.setText("Phone Number " + locations.get(position).getPhoneNumber());
 
             return convertView;
         }
@@ -165,10 +177,12 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
 
     public void onViewButtonPressed() {
         Intent intent = null;
-        if (DatabaseSingleton.getInstance().getCurrentUser().getUserType().equals("Location Employee")) {
+        if (user.get("type").equals("Location Employee")) {
             intent = new Intent(this, LocEmployeeLocationsActivity.class);
-        } else if (DatabaseSingleton.getInstance().getCurrentUser().getUserType().equals("User")) {
+            intent.putExtra("key", user);
+        } else if (user.get("type").equals("User")) {
             intent = new Intent(this, LocationActivity.class);
+            intent.putExtra("key", user);
         }
         startActivity(intent);
     }

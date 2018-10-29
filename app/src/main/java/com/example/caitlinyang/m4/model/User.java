@@ -1,6 +1,8 @@
 package com.example.caitlinyang.m4.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     /**
      * allow us to assign unique id numbers to each student
      */

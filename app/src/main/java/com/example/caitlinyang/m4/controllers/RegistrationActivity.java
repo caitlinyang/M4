@@ -13,9 +13,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.caitlinyang.m4.R;
-import com.example.caitlinyang.m4.model.DataBase;
-import com.example.caitlinyang.m4.model.DatabaseSingleton;
 import com.example.caitlinyang.m4.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +26,14 @@ public class RegistrationActivity extends AppCompatActivity{
     private Spinner userTypeSpinner;
     private Button submitButton;
     private Button cancelButton;
+    private DatabaseReference mDatabase;
 
     private EditText userName, userEmail, userPassword;
     public static List<String> userTypes = Arrays.asList("User", "Location Employee", "Admin");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
@@ -80,9 +83,7 @@ public class RegistrationActivity extends AppCompatActivity{
                 final String userType = (String) userTypeSpinner.getSelectedItem();
 
                 User newUser = new User(name, email, password, userType);
-
-                DatabaseSingleton.getInstance().getDb().getUserList().add(newUser);
-
+                mDatabase.child("users").child(email).setValue(newUser);
                 Intent main = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 startActivity(main);
             }

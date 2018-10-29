@@ -8,26 +8,43 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.caitlinyang.m4.R;
-import com.example.caitlinyang.m4.model.DataBase;
-import com.example.caitlinyang.m4.model.DatabaseSingleton;
+import com.example.caitlinyang.m4.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class UserHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
+    private DatabaseReference mDatabase;
+    private HashMap<String, Object> users;
+    private HashMap<String, Object> user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         setContentView(R.layout.activity_user_home);
 
         TextView welcome = (TextView) findViewById(R.id.welcomeUser);
-        welcome.setText("Welcome " + DatabaseSingleton.getInstance().getCurrentUser().getName());
+        if (intent.hasExtra("key")) {
+            HashMap<String, Object> user = (HashMap<String, Object>) intent.getSerializableExtra("key");
+            Log.d("TEST", (String) user.get("name"));
+            //Fix later
+            welcome.setText(String.valueOf("Welcome " + (String) user.get("name")));
+        }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);

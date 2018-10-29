@@ -26,12 +26,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.DatabaseSingleton;
 import com.example.caitlinyang.m4.model.Item;
 import com.example.caitlinyang.m4.model.Locations;
 import com.example.caitlinyang.m4.model.SimpleModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LocationScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,9 +45,12 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
+    private DatabaseReference mDatabase;
+    private HashMap<String, Object> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
@@ -56,7 +65,18 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         navigationView.setNavigationItemSelectedListener(this);
         
         readLocationData();
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
+                users = (HashMap<String, Object>) data.get("users");
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         listView = (ListView) findViewById(R.id.locationslist);
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
@@ -113,7 +133,8 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
 
         @Override
         public int getCount() {
-            return SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getItems().size() - 1).getKey();
+            //return SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getItems().size() - 1).getKey();
+            return users.size();
         }
 
         @Override
@@ -176,7 +197,8 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
                 double lat = Double.parseDouble(tokens[2]);
                 double lon = Double.parseDouble(tokens[3]);
                 int key = Integer.parseInt(tokens[0]);
-                SimpleModel.getInstance().addItem(new Locations(key, tokens[1], lon, lat, tokens[4], tokens[8], tokens[9]));
+
+                mDatabase.child("locations").child(Integer.toString(key)).setValue(new Locations(key, tokens[1], lon, lat, tokens[4], tokens[8], tokens[9]));
 
                 Log.d("HomeScreenActivity", "Just created: " + SimpleModel.getInstance());
 

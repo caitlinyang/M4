@@ -1,9 +1,10 @@
 package com.example.caitlinyang.m4.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Locations {
+public class Locations implements Serializable {
     public static final Locations SPEC_LOCATION = new Locations();
 
     private String locationName;

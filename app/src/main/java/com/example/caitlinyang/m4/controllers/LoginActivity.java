@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,9 +78,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (!found) {
                     Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
         });
         // Cancel Button goes back to the welcome screen if cancel is hit

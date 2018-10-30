@@ -50,6 +50,8 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
     private HashMap<String, Object> users;
     private HashMap<String, Object> user;
     private List<Locations> locations;
+    private CustomAdapter customAdapter;
+    private Locations instanceLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +70,20 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         navigationView.setNavigationItemSelectedListener(this);
         
         readLocationData();
+        listView = (ListView) findViewById(R.id.locationslist);
+
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 locations = new ArrayList<>();
                 DataSnapshot data = dataSnapshot.child("locations");
+                Log.d("TEST", "hi");
                 for (DataSnapshot snapshot : data.getChildren()) {
                     Locations location = snapshot.getValue(Locations.class);
                     locations.add(location);
                 }
+                customAdapter = new CustomAdapter();
+                listView.setAdapter(customAdapter);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -86,23 +93,12 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         if (intent.hasExtra("key")) {
             user = (HashMap<String, Object>) intent.getSerializableExtra("key");
         }
-        listView = (ListView) findViewById(R.id.locationslist);
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listView.setSelected(true);
                 Log.d("KMyAct", "" + position);
-                Locations instanceLoc = SimpleModel.getInstance().getItems().get(position);
-                SimpleModel.getInstance().setPositionTracker(position);
-                if (instanceLoc != null) {
-                    Locations.getInstance().addAttributes(instanceLoc.getLocationName(),
-                            instanceLoc.getLongitude(), instanceLoc.getLatitude(),
-                            instanceLoc.getAddress(), instanceLoc.getLocationType(),
-                            instanceLoc.getPhoneNumber());
-                }
+                instanceLoc = locations.get(position);
                 onViewButtonPressed();
             }
         });
@@ -182,7 +178,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
             intent.putExtra("key", user);
         } else if (user.get("type").equals("User")) {
             intent = new Intent(this, LocationActivity.class);
-            intent.putExtra("key", user);
+            intent.putExtra("location", instanceLoc);
         }
         startActivity(intent);
     }
@@ -194,9 +190,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(inputStream, Charset.forName("UTF-8"))
         );
-
         String line = "";
-
         try {
             // Skip the Headers from csv file
             reader.readLine();

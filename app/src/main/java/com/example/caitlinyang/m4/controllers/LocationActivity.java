@@ -1,5 +1,6 @@
 package com.example.caitlinyang.m4.controllers;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,15 +20,21 @@ import com.example.caitlinyang.m4.model.SimpleModel;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
+
 public class LocationActivity extends AppCompatActivity {
 
     private ListView listView;
+    private Locations location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-
+        Intent intent = getIntent();
+        if (intent.hasExtra("location")) {
+            location = (Locations) intent.getSerializableExtra("location");
+        }
         listView = (ListView) findViewById(R.id.location_information);
         CustomAdapter customAdapter = new CustomAdapter();
 
@@ -64,12 +71,12 @@ public class LocationActivity extends AppCompatActivity {
             TextView latText = (TextView) convertView.findViewById(R.id.textView_ind_location_latitude);
 
 
-            locName.setText(Locations.getInstance().getLocationName());
-            locType.setText("Location Type: " + Locations.getInstance().getLocationType());
-            lonText.setText("Longitude: " + Double.toString(Locations.getInstance().getLongitude()));
-            latText.setText("Latitude: " + Double.toString(Locations.getInstance().getLatitude()));
-            address.setText("Address: " + Locations.getInstance().getAddress());
-            phoneNum.setText("Phone Number: " + Locations.getInstance().getPhoneNumber());
+            locName.setText(location.getLocationName());
+            locType.setText("Location Type: " + location.getLocationType());
+            lonText.setText("Longitude: " + Double.toString(location.getLongitude()));
+            latText.setText("Latitude: " + Double.toString(location.getLatitude()));
+            address.setText("Address: " + location.getAddress());
+            phoneNum.setText("Phone Number: " + location.getPhoneNumber());
 
             return convertView;
         }

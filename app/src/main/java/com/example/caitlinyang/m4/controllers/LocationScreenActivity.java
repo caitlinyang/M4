@@ -71,7 +71,10 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         
         readLocationData();
         listView = (ListView) findViewById(R.id.locationslist);
-
+        Intent intent = getIntent();
+        if (intent.hasExtra("key")) {
+            user = (HashMap<String, Object>) intent.getSerializableExtra("key");
+            Log.d("Test", (String) user.get("name"));
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -89,9 +92,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        Intent intent = getIntent();
-        if (intent.hasExtra("key")) {
-            user = (HashMap<String, Object>) intent.getSerializableExtra("key");
+
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -173,10 +174,10 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
 
     public void onViewButtonPressed() {
         Intent intent = null;
-        if (user.get("type").equals("Location Employee")) {
+        if (user.get("userType").equals("Location Employee")) {
             intent = new Intent(this, LocEmployeeLocationsActivity.class);
             intent.putExtra("key", user);
-        } else if (user.get("type").equals("User")) {
+        } else if (user.get("userType").equals("User")) {
             intent = new Intent(this, LocationActivity.class);
             intent.putExtra("location", instanceLoc);
         }

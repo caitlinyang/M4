@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //Need to wait for database to populate first before clicking rn
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

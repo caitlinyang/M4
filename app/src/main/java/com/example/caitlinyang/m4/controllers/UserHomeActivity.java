@@ -40,7 +40,7 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
 
         TextView welcome = (TextView) findViewById(R.id.welcomeUser);
         if (intent.hasExtra("key")) {
-            HashMap<String, Object> user = (HashMap<String, Object>) intent.getSerializableExtra("key");
+            user = (HashMap<String, Object>) intent.getSerializableExtra("key");
             Log.d("TEST", (String) user.get("name"));
             //Fix later
             welcome.setText(String.valueOf("Welcome " + (String) user.get("name")));

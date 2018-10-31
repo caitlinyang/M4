@@ -24,12 +24,15 @@ import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Item;
 import com.example.caitlinyang.m4.model.Locations;
 import com.example.caitlinyang.m4.model.SimpleModel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class AddItemActivity extends AppCompatActivity implements DialogInterface.OnCancelListener {
 
@@ -53,12 +56,15 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
     private EditText fullDesc;
 
     private ViewFlipper viewFlipper;
+    private DatabaseReference mDatabase;
+    private Locations location;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
-
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         viewFlipper = findViewById(R.id.viewFlipper);
 
         final List<String> items = Arrays.asList("Clothing", "Hat", "Kitchen", "Electronics", "Household", "Other");
@@ -69,6 +75,13 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         timeStamp = (EditText) findViewById(R.id.time_stamp_input);
         valueInput = (EditText) findViewById(R.id.valueInput);
         categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
+
+        intent = getIntent();
+        if (intent.hasExtra("location")) {
+            Log.d("TEST", "bye");
+            location = (Locations) intent.getSerializableExtra("location");
+            Log.d("TEST", location.getLocationName());
+        }
 
 
         // Taking in the inputs from User for time stamp and value in dollars.
@@ -123,21 +136,18 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
                         || shortDesc.getText().toString().trim().equals("") || fullDesc.getText().toString().trim().equals("")) {
                     Toast.makeText(getApplicationContext(), "Please fill out all of the information!",Toast.LENGTH_SHORT).show();
                 } else {
-                    final String loc_name = Locations.getInstance().getLocationName();
+                    final String loc_name = location.getLocationName();
                     final String name = nameInput.getText().toString();
                     final String time = timeStamp.getText().toString();
                     final String value = valueInput.getText().toString();
                     final String category = categorySpinner.getSelectedItem().toString();
                     final String shortDes = shortDesc.getText().toString();
                     final String fullDes = fullDesc.getText().toString();
-                    SimpleModel.getInstance().addDonation(new Item(loc_name, name, time, value, category, shortDes, fullDes));
-                    SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).addItemToList(
-                            new Item(loc_name, name, time, value, category, shortDes, fullDes));
-                    Log.d("MYACTLOOK", name + " " + time + " " + value);
-                    Log.d("MYACTLOOK", " " + SimpleModel.getInstance().getPositionTracker());
-                    Log.d("MYACTLOOK", SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().get(0).getItem_name());
-                    Log.d("MYACTLOOK", SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getLocationName());
+                    Log.d("TEST", "AddItemActivity" + location.getLocationName());
+                    Item item = new Item(loc_name, name, time, value, category, shortDes, fullDes);
+                    mDatabase.child("items").child(item.getKey()).setValue(item);
                     Intent main = new Intent(getBaseContext(), LocEmployeeLocationsActivity.class);
+                    main.putExtra("location", location);
                     startActivity(main);
                 }
             }

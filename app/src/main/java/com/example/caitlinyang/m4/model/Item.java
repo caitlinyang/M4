@@ -1,6 +1,9 @@
 package com.example.caitlinyang.m4.model;
 
-public class Item {
+import java.io.Serializable;
+import java.util.Random;
+
+public class Item implements Serializable{
     public static final Item SPEC_ITEM = new Item();
 
     private String loc_name;
@@ -10,6 +13,8 @@ public class Item {
     private String category;
     private String shortDes;
     private String longDes;
+    private String key;
+    private Random rand;
 
     public Item() {}
 
@@ -22,21 +27,13 @@ public class Item {
         this.category = category;
         this.shortDes = shortDes;
         this.longDes = longDes;
+        rand = new Random();
+        key = Integer.toString(rand.nextInt(100000));
     }
     public static Item getInstance() {
         return SPEC_ITEM;
     }
 
-    public void addAttributes(String loc_name, String item_name, String time_stamp, String valueDollars, String category,
-                              String shortDes, String longDes) {
-        SPEC_ITEM.loc_name = loc_name;
-        SPEC_ITEM.item_name = item_name;
-        SPEC_ITEM.time_stamp = time_stamp;
-        SPEC_ITEM.valueDollars = valueDollars;
-        SPEC_ITEM.category = category;
-        SPEC_ITEM.shortDes = shortDes;
-        SPEC_ITEM.longDes = longDes;
-    }
     public String getLoc_name() { return loc_name; }
 
     public String getItem_name() { return item_name; }
@@ -60,4 +57,6 @@ public class Item {
     public String getLongDes() {
         return longDes;
     }
+
+    public String getKey() {return key;}
 }

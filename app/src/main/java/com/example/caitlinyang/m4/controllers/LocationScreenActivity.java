@@ -98,8 +98,9 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listView.setSelected(true);
-                Log.d("KMyAct", "" + position);
+                Log.d("TEST", "" + position);
                 instanceLoc = locations.get(position);
+                Log.d("TEST", instanceLoc.getAddress());
                 onViewButtonPressed();
             }
         });
@@ -111,13 +112,8 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         switch (item.getItemId()) {
             case R.id.hp:
                 Intent main = null;
-                if (user.get("type").equals("User")) {
-                    main = new Intent(getBaseContext(), UserHomeActivity.class);
-                    main.putExtra("key", user);
-                } else if (user.get("type").equals("Location Employee")) {
-                    main = new Intent(getBaseContext(), LocEmployeeActivity.class);
-                    main.putExtra("key", user);
-                }
+                main = new Intent(getBaseContext(), UserHomeActivity.class);
+                main.putExtra("key", user);
                 startActivity(main);
                 break;
             case R.id.loclist:
@@ -176,10 +172,10 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         Intent intent = null;
         if (user.get("userType").equals("Location Employee")) {
             intent = new Intent(this, LocEmployeeLocationsActivity.class);
-            intent.putExtra("key", user);
+            intent.putExtra("location", instanceLoc);
         } else if (user.get("userType").equals("User")) {
             intent = new Intent(this, LocationActivity.class);
-            intent.putExtra("location", instanceLoc);
+            intent.putExtra("key", user);
         }
         startActivity(intent);
     }
@@ -208,8 +204,6 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
                 int key = Integer.parseInt(tokens[0]);
 
                 mDatabase.child("locations").child(Integer.toString(key)).setValue(new Locations(key, tokens[1], lon, lat, tokens[4], tokens[8], tokens[9]));
-
-                Log.d("HomeScreenActivity", "Just created: " + SimpleModel.getInstance());
 
             }
             reader.close();

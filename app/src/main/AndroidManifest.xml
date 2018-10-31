@@ -22,7 +22,6 @@
         <activity android:name=".controllers.LocationScreenActivity" />
         <activity android:name=".controllers.LocationActivity" />
         <activity android:name=".controllers.UserHomeActivity" />
-        <activity android:name=".controllers.LocEmployeeActivity" />
         <activity android:name=".controllers.LocEmployeeLocationsActivity" />
         <activity android:name=".controllers.AddItemActivity" />
         <activity android:name=".controllers.ViewItemsActivity"></activity>

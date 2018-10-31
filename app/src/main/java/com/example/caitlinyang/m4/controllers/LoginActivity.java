@@ -64,15 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                     HashMap<String, Object> user = (HashMap<String, Object>) users.get(key);
                     if(username.getText().toString().trim().toLowerCase().equals(user.get("email")) && password.getText().toString().equals(user.get("password"))) {
                         Log.d("TEST", "Yeet");
-                         if (user.get("userType").equals("User")) {
-                            Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
-                            main.putExtra("key", user);
-                            startActivity(main);
-                        } else if (user.get("userType").equals("Location Employee")) {
-                            Intent main2 = new Intent(getBaseContext(), LocEmployeeActivity.class);
-                            main2.putExtra("key", user);
-                            startActivity(main2);
-                        }
+                        Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
+                        main.putExtra("key", user);
+                        startActivity(main);
                         found = true;
                         }
                 }

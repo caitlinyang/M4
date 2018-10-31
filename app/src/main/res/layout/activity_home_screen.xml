@@ -34,7 +34,9 @@
         android:divider="#f00"
         android:dividerHeight="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view2"

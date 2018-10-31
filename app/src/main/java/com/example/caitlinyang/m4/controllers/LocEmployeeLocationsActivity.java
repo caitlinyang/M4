@@ -3,6 +3,7 @@ package com.example.caitlinyang.m4.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,11 +13,16 @@ import android.widget.TextView;
 
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Locations;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class LocEmployeeLocationsActivity extends AppCompatActivity {
 
     private ListView listView;
+    private DatabaseReference mDatabase;
+    private Intent intent;
+    private Locations location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +30,21 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loc_employee_locations);
 
         listView = (ListView) findViewById(R.id.location_information);
-        LocEmployeeLocationsActivity.CustomAdapter customAdapter = new LocEmployeeLocationsActivity.CustomAdapter();
 
-        listView.setAdapter(customAdapter);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         Button addItem = (Button) findViewById(R.id.add_item);
-
+        intent = getIntent();
+        if (intent.hasExtra("location")) {
+            Log.d("TEST", "bye");
+            location = (Locations) intent.getSerializableExtra("location");
+            Log.d("TEST", location.getLocationName());
+        }
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent main = new Intent(getBaseContext(), AddItemActivity.class);
+                main.putExtra("location", location);
                 startActivity(main);
             }
         });
@@ -44,10 +55,12 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent main = new Intent(getBaseContext(), ViewItemsActivity.class);
+                main.putExtra("location", location);
                 startActivity(main);
             }
         });
-
+        LocEmployeeLocationsActivity.CustomAdapter customAdapter = new LocEmployeeLocationsActivity.CustomAdapter();
+        listView.setAdapter(customAdapter);
     }
 
 
@@ -81,12 +94,12 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
             TextView latText = (TextView) convertView.findViewById(R.id.textView_ind_location_latitude);
 
 
-            locName.setText(Locations.getInstance().getLocationName());
-            locType.setText("Location Type: " + Locations.getInstance().getLocationType());
-            lonText.setText("Longitude: " + Double.toString(Locations.getInstance().getLongitude()));
-            latText.setText("Latitude: " + Double.toString(Locations.getInstance().getLatitude()));
-            address.setText("Address: " + Locations.getInstance().getAddress());
-            phoneNum.setText("Phone Number: " + Locations.getInstance().getPhoneNumber());
+            locName.setText(location.getLocationName());
+            locType.setText("Location Type: " + location.getLocationType());
+            lonText.setText("Longitude: " + Double.toString(location.getLongitude()));
+            latText.setText("Latitude: " + Double.toString(location.getLatitude()));
+            address.setText("Address: " + location.getAddress());
+            phoneNum.setText("Phone Number: " + location.getPhoneNumber());
 
             return convertView;
         }

@@ -14,46 +14,90 @@ import android.widget.TextView;
 
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Item;
+import com.example.caitlinyang.m4.model.Locations;
 import com.example.caitlinyang.m4.model.SimpleModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewItemsActivity extends AppCompatActivity {
 
     private ListView listView;
+    private DatabaseReference mDatabase;
+    private List<Item> items;
+    private Item instanceItem;
+    private Intent intent;
+    private Locations location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_items);
-
         listView = (ListView) findViewById(R.id.items_list_listView);
-        CustomAdapter customAdapter1 = new CustomAdapter();
+        intent = getIntent();
+        if (intent.hasExtra("location")) {
+            location = (Locations) intent.getSerializableExtra("location");
+        }
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                items = new ArrayList<>();
+                DataSnapshot data = dataSnapshot.child("items");
+                Log.d("TEST", "hi");
+                for (DataSnapshot snapshot : data.getChildren()) {
+                    Item item = snapshot.getValue(Item.class);
+                    if (intent.hasExtra("filter1")) {
+                        if (intent.getStringExtra("filter1").equals("item") && intent.getStringExtra("filter2").equals("all")) {
+                            if (item.getItem_name().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim())) {
+                                items.add(item);
+                            }
+                        } else if (intent.getStringExtra("filter1").equals("category") && intent.getStringExtra("filter2").equals("all")){
+                            if (item.getCategory().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim())) {
+                                items.add(item);
+                            }
+                        } else if (intent.getStringExtra("filter1").equals("item") && intent.getStringExtra("filter2").equals("all")) {
+                            if (item.getItem_name().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim()) && item.getLoc_name().equals(intent.getStringExtra("location"))) {
+                                items.add(item);
+                            }
+                        } else if (intent.getStringExtra("filter1").equals("category") && intent.getStringExtra("filter2").equals("one")){
+                            if (item.getCategory().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim()) && item.getLoc_name().equals(intent.getStringExtra("location"))) {
+                                items.add(item);
+                            }
+                        }
+                    }
+                    else {
+                        if (item.getLoc_name().equals(location.getLocationName())) {
+                            items.add(item);
+                        }
+                    }
+                    ViewItemsActivity.CustomAdapter customAdapter1 = new ViewItemsActivity.CustomAdapter();
+                    listView.setAdapter(customAdapter1);
+                }
+            }
 
-        listView.setAdapter(customAdapter1);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick (AdapterView < ? > parent, View view,int position, long id){
                 listView.setSelected(true);
                 Log.d("KMyAct", "" + position);
-                Item instanceItem = SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().get(position);
-                SimpleModel.getInstance().setPositionTracker(position);
-
-                if (instanceItem != null) {
-                    instanceItem.getInstance().addAttributes(instanceItem.getLoc_name(),
-                            instanceItem.getItem_name(), instanceItem.getTime_stamp(),
-                            instanceItem.getValueDollars(), instanceItem.getCategory(),
-                            instanceItem.getShortDes(), instanceItem.getLongDes());
-                }
+                instanceItem = items.get(position);
                 onViewButtonPressed();
             }
         });
     }
-
     class CustomAdapter extends BaseAdapter {
-
         @Override
         public int getCount() {
-            return SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().size();
+            return items.size();
         }
 
         @Override
@@ -70,37 +114,30 @@ public class ViewItemsActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.individual_item_layout, parent, false);
 
-            List<Item> s = SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems();
-
             TextView nameOfItem = (TextView) convertView.findViewById(R.id.individual_item);
-            nameOfItem.setText(SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getItem_name());
+            nameOfItem.setText(items.get(position).getItem_name());
 
             TextView time = (TextView) convertView.findViewById(R.id.time_donation_came);
-            time.setText(SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getTime_stamp());
+            time.setText(items.get(position).getTime_stamp());
 
             TextView value = (TextView) convertView.findViewById(R.id.value_donation_came);
-            value.setText(SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getValueDollars());
+            value.setText(items.get(position).getValueDollars());
 
             TextView category = (TextView) convertView.findViewById(R.id.category_donation_came);
-            category.setText(SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getCategory());
+            category.setText(items.get(position).getCategory());
 
             TextView shortDescription = (TextView) convertView.findViewById(R.id.shortDes_donation_came);
-            shortDescription.setText(SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getShortDes());
+            shortDescription.setText(items.get(position).getShortDes());
 
             TextView fullDescription = (TextView) convertView.findViewById(R.id.fullDes_donation_came);
-            fullDescription.setText(SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getPositionTracker()).getListOfItems().
-                    get(position).getLongDes());
+            fullDescription.setText(items.get(position).getLongDes());
 
             return convertView;
         }
     }
     public void onViewButtonPressed() {
         Intent intent = new Intent(this, IndividualItemActivity.class);
+        intent.putExtra("item", instanceItem);
         startActivity(intent);
     }
 }

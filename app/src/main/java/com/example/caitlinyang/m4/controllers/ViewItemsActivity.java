@@ -60,12 +60,12 @@ public class ViewItemsActivity extends AppCompatActivity {
                             if (item.getCategory().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim())) {
                                 items.add(item);
                             }
-                        } else if (intent.getStringExtra("filter1").equals("item") && intent.getStringExtra("filter2").equals("all")) {
-                            if (item.getItem_name().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim()) && item.getLoc_name().equals(intent.getStringExtra("location"))) {
+                        } else if (intent.getStringExtra("filter1").equals("item") && intent.getStringExtra("filter2").equals("one")) {
+                            if (item.getItem_name().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim()) && item.getLoc_name().toLowerCase().trim().equals(intent.getStringExtra("filter3").toLowerCase().trim())) {
                                 items.add(item);
                             }
                         } else if (intent.getStringExtra("filter1").equals("category") && intent.getStringExtra("filter2").equals("one")){
-                            if (item.getCategory().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim()) && item.getLoc_name().equals(intent.getStringExtra("location"))) {
+                            if (item.getCategory().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim()) && item.getLoc_name().toLowerCase().trim().equals(intent.getStringExtra("filter3").toLowerCase().trim())) {
                                 items.add(item);
                             }
                         }

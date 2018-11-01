@@ -48,6 +48,7 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
     private ArrayAdapter<String> adapter1;
     private ArrayAdapter<String> adapter2;
     private ArrayAdapter<String> adapter3;
+    private final UserHomeActivity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,16 +79,17 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
                     Locations location = snapshot.getValue(Locations.class);
                     locations.add(location.getLocationName());
                 }
-                Log.d("TEST", Integer.toString(locations.size()));
+                adapter3 = new ArrayAdapter(activity, android.R.layout.simple_spinner_item, locations);
+                adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                filter3.setAdapter(adapter3);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
 
-//        adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, locations);
-//        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        filter3.setAdapter(adapter3);
+
+
         TextView welcome = (TextView) findViewById(R.id.welcomeUser);
         if (intent.hasExtra("key")) {
             user = (HashMap<String, Object>) intent.getSerializableExtra("key");
@@ -121,7 +123,7 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
                     main.putExtra("filter2", "all");
                 } else {
                     main.putExtra("filter2", "one");
-                    main.putExtra("location", (String) filter3.getSelectedItem());
+                    main.putExtra("filter3", (String) filter3.getSelectedItem());
                 }
                 main.putExtra("search", query);
                 startActivity(main);

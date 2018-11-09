@@ -1,6 +1,7 @@
 package com.example.caitlinyang.m4.controllers;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,7 +44,7 @@ public class ViewItemsActivity extends AppCompatActivity {
         }
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 items = new ArrayList<>();
                 DataSnapshot data = dataSnapshot.child("items");
                 Log.d("TEST", "hi");
@@ -52,20 +53,23 @@ public class ViewItemsActivity extends AppCompatActivity {
                     if (intent.hasExtra("filter1")) {
                         if ("item".equals(intent.getStringExtra("filter1"))
                                 && intent.getStringExtra("filter2").equals("all")) {
-                            if (item.getItem_name().trim().toLowerCase()
+                            if (item != null
+                                    && item.getItem_name().trim().toLowerCase()
                                     .equals(intent.getStringExtra("search")
                                             .toLowerCase().trim())) {
                                 items.add(item);
                             }
                         } else if (intent.getStringExtra("filter1").equals("category")
                                 && intent.getStringExtra("filter2").equals("all")){
-                            if (item.getCategory().trim().toLowerCase().equals(intent
+                            if (item != null
+                                    && item.getCategory().trim().toLowerCase().equals(intent
                                     .getStringExtra("search").toLowerCase().trim())) {
                                 items.add(item);
                             }
                         } else if (intent.getStringExtra("filter1").equals("item")
                                 && intent.getStringExtra("filter2").equals("one")) {
-                            if (item.getItem_name().trim().toLowerCase().equals(intent
+                            if (item != null
+                                    && item.getItem_name().trim().toLowerCase().equals(intent
                                     .getStringExtra("search").toLowerCase().trim())
                                     && item.getLoc_name().toLowerCase().trim().equals(intent
                                     .getStringExtra("filter3").toLowerCase().trim())) {
@@ -73,7 +77,8 @@ public class ViewItemsActivity extends AppCompatActivity {
                             }
                         } else if (intent.getStringExtra("filter1").equals("category")
                                 && intent.getStringExtra("filter2").equals("one")){
-                            if (item.getCategory().trim().toLowerCase().equals(intent
+                            if (item != null
+                                    && item.getCategory().trim().toLowerCase().equals(intent
                                     .getStringExtra("search").toLowerCase().trim())
                                     && item.getLoc_name().toLowerCase().trim()
                                     .equals(intent.getStringExtra("filter3")
@@ -83,7 +88,8 @@ public class ViewItemsActivity extends AppCompatActivity {
                         }
                     }
                     else {
-                        if (item.getLoc_name().equals(location.getLocationName())) {
+                        if (item != null
+                            && item.getLoc_name().equals(location.getLocationName())) {
                             items.add(item);
                         }
                     }
@@ -94,7 +100,7 @@ public class ViewItemsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,7 +113,7 @@ public class ViewItemsActivity extends AppCompatActivity {
             }
         });
     }
-    public class CustomAdapter extends BaseAdapter {
+    protected class CustomAdapter extends BaseAdapter {
         @Override
         public int getCount() {
             return items.size();
@@ -125,7 +131,7 @@ public class ViewItemsActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater()
+            View newView = getLayoutInflater()
                     .inflate(R.layout.individual_item_layout, parent, false);
 
             TextView nameOfItem = convertView.findViewById(R.id.individual_item);
@@ -140,10 +146,10 @@ public class ViewItemsActivity extends AppCompatActivity {
             TextView shortDescription = convertView.findViewById(R.id.shortDes_donation_came);
             shortDescription.setText(items.get(position).getShortDes());
 
-            return convertView;
+            return newView;
         }
     }
-    protected void onViewButtonPressed() {
+    private void onViewButtonPressed() {
         Intent intent = new Intent(this, IndividualItemActivity.class);
         intent.putExtra("item", instanceItem);
         startActivity(intent);

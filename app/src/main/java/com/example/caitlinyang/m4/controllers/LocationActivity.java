@@ -25,7 +25,7 @@ public class LocationActivity extends AppCompatActivity {
         if (intent.hasExtra("location")) {
             location = (Locations) intent.getSerializableExtra("location");
         }
-        listView = (ListView) findViewById(R.id.location_information);
+        listView = findViewById(R.id.location_information);
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
@@ -50,7 +50,7 @@ public class LocationActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater()
+            View newView = getLayoutInflater()
                     .inflate(R.layout.individual_location_layout, parent, false);
 
             TextView locName = convertView.findViewById(R.id.textView_ind_location_name);
@@ -69,7 +69,7 @@ public class LocationActivity extends AppCompatActivity {
             address.setText("Address: " + location.getAddress());
             phoneNum.setText("Phone Number: " + location.getPhoneNumber());
 
-            return convertView;
+            return newView;
         }
     }
 }

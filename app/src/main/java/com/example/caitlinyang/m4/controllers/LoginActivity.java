@@ -1,6 +1,7 @@
 package com.example.caitlinyang.m4.controllers;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,18 +40,18 @@ public class LoginActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.registration_email);
         userPassword = findViewById(R.id.registration_password);
 
-        Log.d("TESTTEST", "Login Activity reached");
+        Log.d("TEST", "Login Activity reached");
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
                 Log.d("TEST", data.get("users").toString());
                 users = (HashMap<String, Object>) data.get("users");
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
@@ -65,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(username.getText().toString().trim().toLowerCase()
                             .equals(user.get("email")) && password.getText()
                             .toString().equals(user.get("password"))) {
-                        Log.d("TEST", "Yeet");
+                        Log.d("TEST", "hi");
                         Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
                         main.putExtra("key", user);
                         startActivity(main);
@@ -81,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         // Cancel Button goes back to the welcome screen if cancel is hit
         Button cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent welcome = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 startActivity(welcome);

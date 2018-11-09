@@ -35,7 +35,7 @@ public class UserHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    ActionBarDrawerToggle toggle;
+    private ActionBarDrawerToggle toggle;
     private HashMap<String, Object> user;
     private Spinner filter1;
     private Spinner filter2;
@@ -67,7 +67,7 @@ public class UserHomeActivity extends AppCompatActivity
         filter2.setAdapter(adapter2);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 locations = new ArrayList<>();
                 DataSnapshot data = dataSnapshot.child("locations");
                 Log.d("TEST", "hi");
@@ -82,7 +82,7 @@ public class UserHomeActivity extends AppCompatActivity
                 filter3.setAdapter(adapter3);
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
 
@@ -110,7 +110,6 @@ public class UserHomeActivity extends AppCompatActivity
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String s) {
-                String query = s;
                 Intent main = new Intent(getBaseContext(), ViewItemsActivity.class);
                 if (filter1.getSelectedItem() == "Search By Item") {
                     main.putExtra("filter1", "item");
@@ -123,7 +122,7 @@ public class UserHomeActivity extends AppCompatActivity
                     main.putExtra("filter2", "one");
                     main.putExtra("filter3", (String) filter3.getSelectedItem());
                 }
-                main.putExtra("search", query);
+                main.putExtra("search", s);
                 startActivity(main);
                 return true;
             }

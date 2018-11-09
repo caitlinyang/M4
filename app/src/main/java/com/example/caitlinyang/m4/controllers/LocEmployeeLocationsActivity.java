@@ -81,7 +81,7 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater()
+            View newView = getLayoutInflater()
                     .inflate(R.layout.loc_employee_individual_location, parent, false);
 
             TextView locName = convertView.findViewById(R.id.textView_ind_location_name);
@@ -100,7 +100,7 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
             address.setText("Address: " + location.getAddress());
             phoneNum.setText("Phone Number: " + location.getPhoneNumber());
 
-            return convertView;
+            return newView;
         }
     }
 

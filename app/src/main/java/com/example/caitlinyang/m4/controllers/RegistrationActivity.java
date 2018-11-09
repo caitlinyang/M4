@@ -50,6 +50,7 @@ public class RegistrationActivity extends AppCompatActivity{
         // cancel button going back to Welcome Screen
         cancelButton = findViewById(R.id.cancelRegistration);
         cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent welcome = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 startActivity(welcome);
@@ -93,7 +94,7 @@ public class RegistrationActivity extends AppCompatActivity{
                 registerUser(newUser, email);
             }
 
-            public void registerUser(User newUser, String email) {
+            protected void registerUser(User newUser, String email) {
                 mDatabase.child("users").child(email).setValue(newUser);
                 Intent main = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 startActivity(main);

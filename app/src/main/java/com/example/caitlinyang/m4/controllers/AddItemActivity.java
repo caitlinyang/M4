@@ -79,11 +79,11 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         // Get selected items from spinner
 
         shortDesc = findViewById(R.id.shortDesInput);
-        fullDesc = (EditText) findViewById(R.id.fullDescInput);
+        fullDesc = findViewById(R.id.fullDescInput);
 
 
         // Goes to create a category screen
-        Button createCategory = (Button) findViewById(R.id.add_category);
+        Button createCategory = findViewById(R.id.add_category);
         createCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +112,7 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
             }
         });
 
-        Button submitItem = (Button) findViewById(R.id.submitItem);
+        Button submitItem = findViewById(R.id.submitItem);
         submitItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,7 +176,7 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater()
+            View newView = getLayoutInflater()
                     .inflate(R.layout.individual_location_layout, parent, false);
 
             TextView locName = convertView.findViewById(R.id.textView_ind_location_name);
@@ -195,7 +195,7 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
             address.setText("Address: " + location.getAddress());
             phoneNum.setText("Phone Number: " + location.getPhoneNumber());
 
-            return convertView;
+            return newView;
         }
     }
 }

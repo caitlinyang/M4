@@ -22,6 +22,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         // when the login button is clicked, it switches the view to the Login screen
         Button loginPageButton = findViewById(R.id.loginButton);
         loginPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                 startActivity(intent);
@@ -29,6 +30,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         });
         Button registrationPageButton = findViewById(R.id.registerButton);
         registrationPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), RegistrationActivity.class);
                 startActivity(intent);

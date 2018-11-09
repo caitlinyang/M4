@@ -6,6 +6,7 @@ public class User implements Serializable{
     /**
      * allow us to assign unique id numbers to each student
      */
+    @SuppressWarnings("CanBeFinal")
     private static int Next_Id = 0;
 
     private final int id;

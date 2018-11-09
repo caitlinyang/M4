@@ -2,6 +2,7 @@ package com.example.caitlinyang.m4.controllers;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +40,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         setContentView(R.layout.activity_map);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 locations = new ArrayList<>();
                 DataSnapshot data = dataSnapshot.child("locations");
                 Log.d("TEST", "hi");
@@ -52,7 +53,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 mapFragment.getMapAsync(mapActivity);
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
 

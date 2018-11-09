@@ -52,7 +52,7 @@ public class IndividualItemActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater()
+            View newView = getLayoutInflater()
                     .inflate(R.layout.individual_item_detailed_information, parent,
                             false);
 
@@ -76,7 +76,7 @@ public class IndividualItemActivity extends AppCompatActivity {
                     .findViewById(R.id.textView_ind_item_view_longDes);
             fullDescription.setText("Full Description: " + item.getLongDes());
 
-            return convertView;
+            return newView;
         }
     }
 }

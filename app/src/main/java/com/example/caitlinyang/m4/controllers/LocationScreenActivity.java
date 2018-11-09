@@ -60,7 +60,9 @@ public class LocationScreenActivity extends AppCompatActivity
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         NavigationView navigationView = findViewById(R.id.nav_view2);
         navigationView.setNavigationItemSelectedListener(this);
@@ -74,7 +76,7 @@ public class LocationScreenActivity extends AppCompatActivity
         }
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 locations = new ArrayList<>();
                 DataSnapshot data = dataSnapshot.child("locations");
                 Log.d("TEST", "hi");
@@ -86,11 +88,12 @@ public class LocationScreenActivity extends AppCompatActivity
                 listView.setAdapter(customAdapter);
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
         Button mapButton = findViewById(R.id.viewMaps);
         mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent map = new Intent(getBaseContext(), MapActivity.class);
                 startActivity(map);
@@ -153,7 +156,7 @@ public class LocationScreenActivity extends AppCompatActivity
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.list_view_layout,parent, false);
+            View newView = getLayoutInflater().inflate(R.layout.list_view_layout,parent, false);
 
             TextView locName = convertView.findViewById(R.id.textView_location_name);
             TextView address = convertView.findViewById(R.id.textView_address);
@@ -163,11 +166,11 @@ public class LocationScreenActivity extends AppCompatActivity
             address.setText("Address: " + locations.get(position).getAddress());
             phoneNum.setText("Phone Number " + locations.get(position).getPhoneNumber());
 
-            return convertView;
+            return newView;
         }
     }
 
-    public void onViewButtonPressed() {
+    private void onViewButtonPressed() {
         Intent intent = null;
         if (user.get("userType").equals("Location Employee")) {
             intent = new Intent(this, LocEmployeeLocationsActivity.class);

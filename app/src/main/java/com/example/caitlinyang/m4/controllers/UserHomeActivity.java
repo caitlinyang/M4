@@ -35,11 +35,8 @@ public class UserHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-    private DatabaseReference mDatabase;
-    private HashMap<String, Object> users;
+    ActionBarDrawerToggle toggle;
     private HashMap<String, Object> user;
-    private Intent main;
     private Spinner filter1;
     private Spinner filter2;
     private Spinner filter3;
@@ -48,14 +45,11 @@ public class UserHomeActivity extends AppCompatActivity
             Arrays.asList("Search By Item", "Search By Category");
     private final static List<String> filter2list =
             Arrays.asList("Search All Locations", "Search Specific Location");
-    private ArrayAdapter<String> adapter1;
-    private ArrayAdapter<String> adapter2;
-    private ArrayAdapter<String> adapter3;
     private final UserHomeActivity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         setContentView(R.layout.activity_user_home);
@@ -63,8 +57,8 @@ public class UserHomeActivity extends AppCompatActivity
         filter2 = findViewById(R.id.filter2);
         filter3 = findViewById(R.id.filter3);
         //filter1 spinner
-        adapter1 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, filter1list);
-        adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, filter2list);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, filter1list);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, filter2list);
 
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,7 +76,7 @@ public class UserHomeActivity extends AppCompatActivity
                     Locations location = snapshot.getValue(Locations.class);
                     locations.add(location.getLocationName());
                 }
-                adapter3 = new ArrayAdapter(activity,
+                ArrayAdapter<String> adapter3 = new ArrayAdapter(activity,
                         android.R.layout.simple_spinner_item, locations);
                 adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 filter3.setAdapter(adapter3);
@@ -142,6 +136,7 @@ public class UserHomeActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent main;
         switch (item.getItemId()) {
             case R.id.loc_list:
                 Log.d("TEST", "Testing");

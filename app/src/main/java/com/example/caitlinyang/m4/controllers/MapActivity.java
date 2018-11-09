@@ -30,6 +30,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private DatabaseReference mDatabase;
     private List<Locations> locations;
     private final MapActivity mapActivity = this;
+    private SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                     Locations location = snapshot.getValue(Locations.class);
                     locations.add(location);
                 }
-                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
                 mapFragment.getMapAsync(mapActivity);
             }

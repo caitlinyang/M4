@@ -14,25 +14,17 @@ public class Locations implements Serializable {
     private String address;
     private String phoneNumber;
 
-    private final static int itemTracker = 0;
-
-    private List<Item> listOfItems;
-
-    private int key;
-
     public Locations() {
     }
 
     public Locations(int key, String locationName, double longitude, double latitude,
                     String address, String locationType, String phoneNumber) {
-        this.key = key;
         this.locationName = locationName;
         this.locationType = locationType;
         this.longitude = longitude;
         this.latitude = latitude;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        listOfItems = new ArrayList<>();
     }
 
     public String getLocationName() {

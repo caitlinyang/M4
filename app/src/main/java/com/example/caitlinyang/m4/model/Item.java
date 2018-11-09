@@ -14,7 +14,6 @@ public class Item implements Serializable{
     private String shortDes;
     private String longDes;
     private String key;
-    private Random rand;
 
     public Item() {}
 
@@ -27,7 +26,7 @@ public class Item implements Serializable{
         this.category = category;
         this.shortDes = shortDes;
         this.longDes = longDes;
-        rand = new Random();
+        Random rand = new Random();
         key = Integer.toString(rand.nextInt(100000));
     }
 

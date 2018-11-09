@@ -19,9 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LocEmployeeLocationsActivity extends AppCompatActivity {
 
-    private ListView listView;
-    private DatabaseReference mDatabase;
-    private Intent intent;
     private Locations location;
 
     @Override
@@ -29,12 +26,12 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loc_employee_locations);
 
-        listView = findViewById(R.id.location_information);
+        ListView listView = findViewById(R.id.location_information);
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         Button addItem = findViewById(R.id.add_item);
-        intent = getIntent();
+        Intent intent = getIntent();
         if (intent.hasExtra("location")) {
             Log.d("TEST", "bye");
             location = (Locations) intent.getSerializableExtra("location");

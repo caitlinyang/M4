@@ -1,19 +1,14 @@
 <resources>
     <string name="app_name">DONATION TRACKER</string>
-    <string name="view">View</string>
     <string name="locations">Locations</string>
-    <string name="gallery" />
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="title_activity_map">Map</string>
     <string name = "logout">LOGOUT</string>
-    <string name = "you_made_it">YOU MADE IT</string>
     <string name = "login">LOGIN</string>
-    <string name = "username_input">usernameInput</string>
-    <string name = "password_input">passwordInput</string>
     <string name = "username">username</string>
     <string name = "password">password</string>
-    <string name = "cancel">CANCEL</string>
+    <string name = "cancel">Cancel</string>
     <string name = "welcome">WELCOME</string>
     <string name = "register">REGISTER</string>
     <string name = "registration">REGISTRATION</string>

@@ -47,7 +47,6 @@ public class LocationScreenActivity extends AppCompatActivity
     private List<Locations> locations;
     private CustomAdapter customAdapter;
     private Locations instanceLoc;
-    private Button mapButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,7 @@ public class LocationScreenActivity extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        mapButton = findViewById(R.id.viewMaps);
+        Button mapButton = findViewById(R.id.viewMaps);
         mapButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent map = new Intent(getBaseContext(), MapActivity.class);
@@ -113,8 +112,7 @@ public class LocationScreenActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.hp:
-                Intent main = null;
-                main = new Intent(getBaseContext(), UserHomeActivity.class);
+                Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
                 main.putExtra("key", user);
                 startActivity(main);
                 break;

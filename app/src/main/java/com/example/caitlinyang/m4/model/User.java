@@ -57,7 +57,7 @@ public class User implements Serializable{
         this.email = email;
         this.password = password;
         this.userType = userType;
-        this.id = User.Next_Id++;
+        this.id = User.Next_Id + 1;
     }
 
 

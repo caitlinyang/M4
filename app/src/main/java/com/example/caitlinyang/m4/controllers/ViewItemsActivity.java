@@ -25,15 +25,15 @@ import java.util.List;
 
 public class ViewItemsActivity extends AppCompatActivity {
 
-    private ListView listView;
-    private DatabaseReference mDatabase;
     private List<Item> items;
+    private ListView listView;
     private Item instanceItem;
     private Intent intent;
     private Locations location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_items);
         listView = findViewById(R.id.items_list_listView);
@@ -50,7 +50,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : data.getChildren()) {
                     Item item = snapshot.getValue(Item.class);
                     if (intent.hasExtra("filter1")) {
-                        if (intent.getStringExtra("filter1").equals("item")
+                        if ("item".equals(intent.getStringExtra("filter1"))
                                 && intent.getStringExtra("filter2").equals("all")) {
                             if (item.getItem_name().trim().toLowerCase()
                                     .equals(intent.getStringExtra("search")

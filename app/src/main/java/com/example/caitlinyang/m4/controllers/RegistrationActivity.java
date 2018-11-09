@@ -28,7 +28,9 @@ public class RegistrationActivity extends AppCompatActivity{
     private Button cancelButton;
     private DatabaseReference mDatabase;
 
-    private EditText userName, userEmail, userPassword;
+    private EditText userName;
+    private EditText userEmail;
+    private EditText userPassword;
     private final static List<String> userTypes = Arrays.asList("User",
             "Location Employee", "Admin");
 

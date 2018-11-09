@@ -30,19 +30,9 @@ import java.util.List;
 
 public class AddItemActivity extends AppCompatActivity implements DialogInterface.OnCancelListener {
 
-    private ListView listView;
     private final static List<String> categories = new ArrayList<>();
     private String categoryInput;
-
-//    private String loc_name;
-//    private String name;
-//    private String time;
-//    private String value;
-      private Spinner categorySpinner;
-//    private String category;
-//    private String shortDes;
-//    private String fullDes;
-
+    private Spinner categorySpinner;
     private EditText nameInput;
     private EditText timeStamp;
     private EditText valueInput;
@@ -52,7 +42,6 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
     private ViewFlipper viewFlipper;
     private DatabaseReference mDatabase;
     private Locations location;
-    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +60,7 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         valueInput = findViewById(R.id.valueInput);
         categorySpinner = findViewById(R.id.categorySpinner);
 
-        intent = getIntent();
+        Intent intent = getIntent();
         if (intent.hasExtra("location")) {
             Log.d("TEST", "bye");
             location = (Locations) intent.getSerializableExtra("location");
@@ -127,12 +116,13 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         submitItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nameInput.getText().toString().trim().equals("") || timeStamp.getText()
-                        .toString().trim().equals("") || valueInput
-                        .getText().toString().trim().equals("")
-                        || categorySpinner.getSelectedItem().toString().trim().equals("")
-                        || shortDesc.getText().toString().trim().equals("")
-                        || fullDesc.getText().toString().trim().equals("")) {
+                if ("".equals(nameInput.getText().toString().trim())
+                        || "".equals(timeStamp.getText()
+                        .toString().trim()) || "".equals(valueInput
+                        .getText().toString().trim())
+                        || "".equals(categorySpinner.getSelectedItem().toString().trim())
+                        || "".equals(shortDesc.getText().toString().trim())
+                        || "".equals(fullDesc.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(),
                             "Please fill out all of the information!",
                             Toast.LENGTH_SHORT).show();

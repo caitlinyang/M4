@@ -13,12 +13,13 @@ import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Item;
 
 public class IndividualItemActivity extends AppCompatActivity {
-    private ListView listView;
-    private Intent intent;
     private Item item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ListView listView;
+        Intent intent;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_individual_item_layout);
         intent = getIntent();

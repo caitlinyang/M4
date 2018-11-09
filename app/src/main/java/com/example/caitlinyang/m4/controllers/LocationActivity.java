@@ -3,24 +3,14 @@ package com.example.caitlinyang.m4.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.caitlinyang.m4.R;
-import com.example.caitlinyang.m4.model.DatabaseSingleton;
 import com.example.caitlinyang.m4.model.Locations;
-import com.example.caitlinyang.m4.model.SimpleModel;
-
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
 
 public class LocationActivity extends AppCompatActivity {
 
@@ -60,15 +50,16 @@ public class LocationActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.individual_location_layout, parent, false);
+            convertView = getLayoutInflater()
+                    .inflate(R.layout.individual_location_layout, parent, false);
 
-            TextView locName = (TextView) convertView.findViewById(R.id.textView_ind_location_name);
-            TextView locType = (TextView) convertView.findViewById(R.id.textView_ind_location_type);
-            TextView address = (TextView) convertView.findViewById(R.id.textView_ind_location_address);
-            TextView phoneNum = (TextView) convertView.findViewById(R.id.textView_ind_location_phone_number);
+            TextView locName = convertView.findViewById(R.id.textView_ind_location_name);
+            TextView locType = convertView.findViewById(R.id.textView_ind_location_type);
+            TextView address = convertView.findViewById(R.id.textView_ind_location_address);
+            TextView phoneNum = convertView.findViewById(R.id.textView_ind_location_phone_number);
 
-            TextView lonText = (TextView) convertView.findViewById(R.id.textView_ind_location_longitude);
-            TextView latText = (TextView) convertView.findViewById(R.id.textView_ind_location_latitude);
+            TextView lonText = convertView.findViewById(R.id.textView_ind_location_longitude);
+            TextView latText = convertView.findViewById(R.id.textView_ind_location_latitude);
 
 
             locName.setText(location.getLocationName());

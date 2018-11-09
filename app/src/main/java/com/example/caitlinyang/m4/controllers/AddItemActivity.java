@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,28 +15,23 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.app.AlertDialog.Builder;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Item;
 import com.example.caitlinyang.m4.model.Locations;
-import com.example.caitlinyang.m4.model.SimpleModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class AddItemActivity extends AppCompatActivity implements DialogInterface.OnCancelListener {
 
     private ListView listView;
-    private static List<String> categories = new ArrayList<>();
+    private final static List<String> categories = new ArrayList<>();
     private String categoryInput;
 
 //    private String loc_name;
@@ -67,14 +61,15 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         mDatabase = FirebaseDatabase.getInstance().getReference();
         viewFlipper = findViewById(R.id.viewFlipper);
 
-        final List<String> items = Arrays.asList("Clothing", "Hat", "Kitchen", "Electronics", "Household", "Other");
+        final List<String> items = Arrays.asList("Clothing", "Hat", "Kitchen",
+                "Electronics", "Household", "Other");
         categories.add("Clothing"); categories.add("Hat"); categories.add("Kitchen");
         categories.add("Electronics"); categories.add("Household"); categories.add("Other");
 
-        nameInput = (EditText) findViewById(R.id.item_name_input);
-        timeStamp = (EditText) findViewById(R.id.time_stamp_input);
-        valueInput = (EditText) findViewById(R.id.valueInput);
-        categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
+        nameInput = findViewById(R.id.item_name_input);
+        timeStamp = findViewById(R.id.time_stamp_input);
+        valueInput = findViewById(R.id.valueInput);
+        categorySpinner = findViewById(R.id.categorySpinner);
 
         intent = getIntent();
         if (intent.hasExtra("location")) {
@@ -87,13 +82,14 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         // Taking in the inputs from User for time stamp and value in dollars.
 
         // Updating the Spinner w/ required information.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
 
         // Get selected items from spinner
 
-        shortDesc = (EditText) findViewById(R.id.shortDesInput);
+        shortDesc = findViewById(R.id.shortDesInput);
         fullDesc = (EditText) findViewById(R.id.fullDescInput);
 
 
@@ -131,10 +127,15 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         submitItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nameInput.getText().toString().trim().equals("") || timeStamp.getText().toString().trim().equals("") || valueInput.getText().toString().trim().equals("")
+                if (nameInput.getText().toString().trim().equals("") || timeStamp.getText()
+                        .toString().trim().equals("") || valueInput
+                        .getText().toString().trim().equals("")
                         || categorySpinner.getSelectedItem().toString().trim().equals("")
-                        || shortDesc.getText().toString().trim().equals("") || fullDesc.getText().toString().trim().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please fill out all of the information!",Toast.LENGTH_SHORT).show();
+                        || shortDesc.getText().toString().trim().equals("")
+                        || fullDesc.getText().toString().trim().equals("")) {
+                    Toast.makeText(getApplicationContext(),
+                            "Please fill out all of the information!",
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     final String loc_name = location.getLocationName();
                     final String name = nameInput.getText().toString();
@@ -166,7 +167,7 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         viewFlipper.showNext();
     }
 
-    class CustomAdapter extends BaseAdapter {
+    private class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -185,23 +186,24 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.individual_location_layout, parent, false);
+            convertView = getLayoutInflater()
+                    .inflate(R.layout.individual_location_layout, parent, false);
 
-            TextView locName = (TextView) convertView.findViewById(R.id.textView_ind_location_name);
-            TextView locType = (TextView) convertView.findViewById(R.id.textView_ind_location_type);
-            TextView address = (TextView) convertView.findViewById(R.id.textView_ind_location_address);
-            TextView phoneNum = (TextView) convertView.findViewById(R.id.textView_ind_location_phone_number);
+            TextView locName = convertView.findViewById(R.id.textView_ind_location_name);
+            TextView locType = convertView.findViewById(R.id.textView_ind_location_type);
+            TextView address = convertView.findViewById(R.id.textView_ind_location_address);
+            TextView phoneNum = convertView.findViewById(R.id.textView_ind_location_phone_number);
 
-            TextView lonText = (TextView) convertView.findViewById(R.id.textView_ind_location_longitude);
-            TextView latText = (TextView) convertView.findViewById(R.id.textView_ind_location_latitude);
+            TextView lonText = convertView.findViewById(R.id.textView_ind_location_longitude);
+            TextView latText = convertView.findViewById(R.id.textView_ind_location_latitude);
 
 
-            locName.setText(Locations.getInstance().getLocationName());
-            locType.setText("Location Type: " + Locations.getInstance().getLocationType());
-            lonText.setText("Longitude: " + Double.toString(Locations.getInstance().getLongitude()));
-            latText.setText("Latitude: " + Double.toString(Locations.getInstance().getLatitude()));
-            address.setText("Address: " + Locations.getInstance().getAddress());
-            phoneNum.setText("Phone Number: " + Locations.getInstance().getPhoneNumber());
+            locName.setText(location.getLocationName());
+            locType.setText("Location Type: " + location.getLocationType());
+            lonText.setText("Longitude: " + Double.toString(location.getLongitude()));
+            latText.setText("Latitude: " + Double.toString(location.getLatitude()));
+            address.setText("Address: " + location.getAddress());
+            phoneNum.setText("Phone Number: " + location.getPhoneNumber());
 
             return convertView;
         }

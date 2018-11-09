@@ -18,8 +18,8 @@ public class Item implements Serializable{
 
     public Item() {}
 
-    public Item(String loc_name, String item_name, String time_stamp, String valueDollars, String category,
-                String shortDes, String longDes) {
+    public Item(String loc_name, String item_name, String time_stamp, String valueDollars,
+                String category, String shortDes, String longDes) {
         this.loc_name = loc_name;
         this.item_name = item_name;
         this.time_stamp = time_stamp;
@@ -29,9 +29,6 @@ public class Item implements Serializable{
         this.longDes = longDes;
         rand = new Random();
         key = Integer.toString(rand.nextInt(100000));
-    }
-    public static Item getInstance() {
-        return SPEC_ITEM;
     }
 
     public String getLoc_name() { return loc_name; }

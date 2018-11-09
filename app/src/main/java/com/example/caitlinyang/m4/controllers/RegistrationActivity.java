@@ -29,7 +29,8 @@ public class RegistrationActivity extends AppCompatActivity{
     private DatabaseReference mDatabase;
 
     private EditText userName, userEmail, userPassword;
-    public static List<String> userTypes = Arrays.asList("User", "Location Employee", "Admin");
+    private final static List<String> userTypes = Arrays.asList("User",
+            "Location Employee", "Admin");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +38,15 @@ public class RegistrationActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        userTypeSpinner = (Spinner) findViewById(R.id.registrationusertype);
+        userTypeSpinner = findViewById(R.id.registration_user_type);
         // user type spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, userTypes);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item, userTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(adapter);
 
         // cancel button going back to Welcome Screen
-        cancelButton = (Button) findViewById(R.id.cancelRegistration);
+        cancelButton = findViewById(R.id.cancelRegistration);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent welcome = new Intent(getBaseContext(), WelcomeScreenActivity.class);
@@ -52,10 +54,10 @@ public class RegistrationActivity extends AppCompatActivity{
             }
         });
 
-        submitButton = (Button) findViewById(R.id.submitRegistration);
-        userName = (EditText)findViewById(R.id.registrationfullname);
-        userEmail = (EditText) findViewById(R.id.registration_email);
-        userPassword = (EditText) findViewById(R.id.registrationpassword);
+        submitButton = findViewById(R.id.submitRegistration);
+        userName = findViewById(R.id.registration_full_name);
+        userEmail = findViewById(R.id.registration_email);
+        userPassword = findViewById(R.id.registration_password);
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -63,17 +65,20 @@ public class RegistrationActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 if (userName.getText().toString().trim().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please enter a full name",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter a full name",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (userEmail.getText().toString().trim().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please enter an email",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter an email",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (userPassword.getText().toString().trim().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please enter a password",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter a password",Toast.LENGTH_SHORT).show();
                     return;
                 }
 

@@ -29,11 +29,11 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loc_employee_locations);
 
-        listView = (ListView) findViewById(R.id.location_information);
+        listView = findViewById(R.id.location_information);
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Button addItem = (Button) findViewById(R.id.add_item);
+        Button addItem = findViewById(R.id.add_item);
         intent = getIntent();
         if (intent.hasExtra("location")) {
             Log.d("TEST", "bye");
@@ -49,7 +49,7 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
             }
         });
 
-        Button viewItem = (Button) findViewById(R.id.view_items);
+        Button viewItem = findViewById(R.id.view_items);
 
         viewItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +59,8 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
                 startActivity(main);
             }
         });
-        LocEmployeeLocationsActivity.CustomAdapter customAdapter = new LocEmployeeLocationsActivity.CustomAdapter();
+        LocEmployeeLocationsActivity.CustomAdapter customAdapter =
+                new LocEmployeeLocationsActivity.CustomAdapter();
         listView.setAdapter(customAdapter);
     }
 
@@ -83,15 +84,16 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.loc_employee_individual_location, parent, false);
+            convertView = getLayoutInflater()
+                    .inflate(R.layout.loc_employee_individual_location, parent, false);
 
-            TextView locName = (TextView) convertView.findViewById(R.id.textView_ind_location_name);
-            TextView locType = (TextView) convertView.findViewById(R.id.textView_ind_location_type);
-            TextView address = (TextView) convertView.findViewById(R.id.textView_ind_location_address);
-            TextView phoneNum = (TextView) convertView.findViewById(R.id.textView_ind_location_phone_number);
+            TextView locName = convertView.findViewById(R.id.textView_ind_location_name);
+            TextView locType = convertView.findViewById(R.id.textView_ind_location_type);
+            TextView address = convertView.findViewById(R.id.textView_ind_location_address);
+            TextView phoneNum = convertView.findViewById(R.id.textView_ind_location_phone_number);
 
-            TextView lonText = (TextView) convertView.findViewById(R.id.textView_ind_location_longitude);
-            TextView latText = (TextView) convertView.findViewById(R.id.textView_ind_location_latitude);
+            TextView lonText = convertView.findViewById(R.id.textView_ind_location_longitude);
+            TextView latText = convertView.findViewById(R.id.textView_ind_location_latitude);
 
 
             locName.setText(location.getLocationName());

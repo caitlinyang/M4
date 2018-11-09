@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:id="@+id/hp" android:title="@string/home" />
-<item android:id="@+id/loclist" android:title="@string/locationsList" />
+<item android:id="@+id/loc_list" android:title="@string/locationsList" />
 <item android:id="@+id/logout" android:title="@string/logout" />
 
 </menu>

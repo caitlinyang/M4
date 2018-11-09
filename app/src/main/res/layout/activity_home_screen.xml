@@ -31,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@color/white"
-        app:itemTextColor="@color/darkgray"
-        app:itemIconTint="@color/darkgray"
+        app:itemTextColor="@color/dark_gray"
+        app:itemIconTint="@color/dark_gray"
         app:menu="@menu/user_drawer"
         app:headerLayout="@layout/header"
         android:layout_gravity="start">
@@ -43,7 +43,7 @@
         android:layout_height="match_parent">
 
         <ListView
-            android:id="@+id/locationslist"
+            android:id="@+id/locations_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_centerVertical="true"

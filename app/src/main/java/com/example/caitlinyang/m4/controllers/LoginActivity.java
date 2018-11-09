@@ -19,12 +19,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText username;
-    EditText password;
-    EditText userEmail;
-    EditText userPassword;
+    private EditText username;
+    private EditText password;
+    private EditText userEmail;
+    private EditText userPassword;
     private DatabaseReference mDatabase;
-    HashMap<String, Object> users;
+    private HashMap<String, Object> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = (EditText) findViewById(R.id.usernameInput);
-        password = (EditText) findViewById(R.id.passwordInput);
-        Button loginButton = (Button) findViewById(R.id.loginAccess);
+        username = findViewById(R.id.usernameInput);
+        password = findViewById(R.id.passwordInput);
+        Button loginButton = findViewById(R.id.loginAccess);
 
-        userEmail = (EditText) findViewById(R.id.registration_email);
-        userPassword = (EditText) findViewById(R.id.registrationpassword);
+        userEmail = findViewById(R.id.registration_email);
+        userPassword = findViewById(R.id.registration_password);
 
         Log.d("TESTTEST", "Login Activity reached");
 
@@ -62,7 +62,9 @@ public class LoginActivity extends AppCompatActivity {
                 boolean found = false;
                 for (String key : users.keySet()) {
                     HashMap<String, Object> user = (HashMap<String, Object>) users.get(key);
-                    if(username.getText().toString().trim().toLowerCase().equals(user.get("email")) && password.getText().toString().equals(user.get("password"))) {
+                    if(username.getText().toString().trim().toLowerCase()
+                            .equals(user.get("email")) && password.getText()
+                            .toString().equals(user.get("password"))) {
                         Log.d("TEST", "Yeet");
                         Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
                         main.putExtra("key", user);
@@ -71,12 +73,13 @@ public class LoginActivity extends AppCompatActivity {
                         }
                 }
                 if (!found) {
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),
+                            "Wrong Credentials",Toast.LENGTH_SHORT).show();
                 }
             }
         });
         // Cancel Button goes back to the welcome screen if cancel is hit
-        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        Button cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent welcome = new Intent(getBaseContext(), WelcomeScreenActivity.class);

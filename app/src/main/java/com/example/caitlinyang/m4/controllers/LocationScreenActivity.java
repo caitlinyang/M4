@@ -16,9 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,20 +25,17 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import com.example.caitlinyang.m4.R;
-import com.example.caitlinyang.m4.model.DatabaseSingleton;
-import com.example.caitlinyang.m4.model.Item;
 import com.example.caitlinyang.m4.model.Locations;
-import com.example.caitlinyang.m4.model.SimpleModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LocationScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class LocationScreenActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
 
@@ -61,7 +56,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_view2);
+        drawerLayout = findViewById(R.id.drawer_view2);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
         drawerLayout.addDrawerListener(toggle);
@@ -72,7 +67,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         navigationView.setNavigationItemSelectedListener(this);
         
         readLocationData();
-        listView = (ListView) findViewById(R.id.locationslist);
+        listView = findViewById(R.id.locations_list);
         Intent intent = getIntent();
         if (intent.hasExtra("key")) {
             user = (HashMap<String, Object>) intent.getSerializableExtra("key");
@@ -95,7 +90,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        mapButton = (Button) findViewById(R.id.viewMaps);
+        mapButton = findViewById(R.id.viewMaps);
         mapButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent map = new Intent(getBaseContext(), MapActivity.class);
@@ -123,7 +118,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
                 main.putExtra("key", user);
                 startActivity(main);
                 break;
-            case R.id.loclist:
+            case R.id.loc_list:
                 Intent main2 = new Intent(getBaseContext(), LocationScreenActivity.class);
                 main2.putExtra("key", user);
                 startActivity(main2);
@@ -162,9 +157,9 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.list_view_layout,parent, false);
 
-            TextView locName = (TextView) convertView.findViewById(R.id.textView_location_name);
-            TextView address = (TextView) convertView.findViewById(R.id.textView_address);
-            TextView phoneNum = (TextView) convertView.findViewById(R.id.textView_phone_number);
+            TextView locName = convertView.findViewById(R.id.textView_location_name);
+            TextView address = convertView.findViewById(R.id.textView_address);
+            TextView phoneNum = convertView.findViewById(R.id.textView_phone_number);
 
             locName.setText(locations.get(position).getLocationName());
             address.setText("Address: " + locations.get(position).getAddress());
@@ -210,7 +205,9 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
                 double lon = Double.parseDouble(tokens[3]);
                 int key = Integer.parseInt(tokens[0]);
 
-                mDatabase.child("locations").child(Integer.toString(key)).setValue(new Locations(key, tokens[1], lon, lat, tokens[4], tokens[8], tokens[9]));
+                mDatabase.child("locations").child(Integer.toString(key))
+                        .setValue(new Locations(key, tokens[1], lon, lat, tokens[4],
+                                tokens[8], tokens[9]));
 
             }
             reader.close();

@@ -31,7 +31,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class UserHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class UserHomeActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
@@ -43,8 +44,10 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
     private Spinner filter2;
     private Spinner filter3;
     private List<String> locations;
-    private static List<String> filter1list = Arrays.asList("Search By Item", "Search By Category");
-    private static List<String> filter2list = Arrays.asList("Search All Locations", "Search Specific Location");
+    private final static List<String> filter1list =
+            Arrays.asList("Search By Item", "Search By Category");
+    private final static List<String> filter2list =
+            Arrays.asList("Search All Locations", "Search Specific Location");
     private ArrayAdapter<String> adapter1;
     private ArrayAdapter<String> adapter2;
     private ArrayAdapter<String> adapter3;
@@ -56,9 +59,9 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         setContentView(R.layout.activity_user_home);
-        filter1 = (Spinner) findViewById(R.id.filter1);
-        filter2 = (Spinner) findViewById(R.id.filter2);
-        filter3 = (Spinner) findViewById(R.id.filter3);
+        filter1 = findViewById(R.id.filter1);
+        filter2 = findViewById(R.id.filter2);
+        filter3 = findViewById(R.id.filter3);
         //filter1 spinner
         adapter1 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, filter1list);
         adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, filter2list);
@@ -79,7 +82,8 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
                     Locations location = snapshot.getValue(Locations.class);
                     locations.add(location.getLocationName());
                 }
-                adapter3 = new ArrayAdapter(activity, android.R.layout.simple_spinner_item, locations);
+                adapter3 = new ArrayAdapter(activity,
+                        android.R.layout.simple_spinner_item, locations);
                 adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 filter3.setAdapter(adapter3);
             }
@@ -90,15 +94,15 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
 
 
 
-        TextView welcome = (TextView) findViewById(R.id.welcomeUser);
+        TextView welcome = findViewById(R.id.welcomeUser);
         if (intent.hasExtra("key")) {
             user = (HashMap<String, Object>) intent.getSerializableExtra("key");
             Log.d("TEST", (String) user.get("name"));
             //Fix later
-            welcome.setText(String.valueOf("Welcome " + (String) user.get("name")));
+            welcome.setText(String.valueOf("Welcome " + user.get("name")));
         }
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_view);
+        drawerLayout = findViewById(R.id.drawer_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
         drawerLayout.addDrawerListener(toggle);
@@ -139,7 +143,7 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.loclist:
+            case R.id.loc_list:
                 Log.d("TEST", "Testing");
                 main = new Intent(getApplicationContext(), LocationScreenActivity.class);
                 main.putExtra("key", user);

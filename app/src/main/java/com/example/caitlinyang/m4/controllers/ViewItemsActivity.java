@@ -8,14 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Item;
 import com.example.caitlinyang.m4.model.Locations;
-import com.example.caitlinyang.m4.model.SimpleModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +36,7 @@ public class ViewItemsActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_items);
-        listView = (ListView) findViewById(R.id.items_list_listView);
+        listView = findViewById(R.id.items_list_listView);
         intent = getIntent();
         if (intent.hasExtra("location")) {
             location = (Locations) intent.getSerializableExtra("location");
@@ -52,20 +50,34 @@ public class ViewItemsActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : data.getChildren()) {
                     Item item = snapshot.getValue(Item.class);
                     if (intent.hasExtra("filter1")) {
-                        if (intent.getStringExtra("filter1").equals("item") && intent.getStringExtra("filter2").equals("all")) {
-                            if (item.getItem_name().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim())) {
+                        if (intent.getStringExtra("filter1").equals("item")
+                                && intent.getStringExtra("filter2").equals("all")) {
+                            if (item.getItem_name().trim().toLowerCase()
+                                    .equals(intent.getStringExtra("search")
+                                            .toLowerCase().trim())) {
                                 items.add(item);
                             }
-                        } else if (intent.getStringExtra("filter1").equals("category") && intent.getStringExtra("filter2").equals("all")){
-                            if (item.getCategory().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim())) {
+                        } else if (intent.getStringExtra("filter1").equals("category")
+                                && intent.getStringExtra("filter2").equals("all")){
+                            if (item.getCategory().trim().toLowerCase().equals(intent
+                                    .getStringExtra("search").toLowerCase().trim())) {
                                 items.add(item);
                             }
-                        } else if (intent.getStringExtra("filter1").equals("item") && intent.getStringExtra("filter2").equals("one")) {
-                            if (item.getItem_name().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim()) && item.getLoc_name().toLowerCase().trim().equals(intent.getStringExtra("filter3").toLowerCase().trim())) {
+                        } else if (intent.getStringExtra("filter1").equals("item")
+                                && intent.getStringExtra("filter2").equals("one")) {
+                            if (item.getItem_name().trim().toLowerCase().equals(intent
+                                    .getStringExtra("search").toLowerCase().trim())
+                                    && item.getLoc_name().toLowerCase().trim().equals(intent
+                                    .getStringExtra("filter3").toLowerCase().trim())) {
                                 items.add(item);
                             }
-                        } else if (intent.getStringExtra("filter1").equals("category") && intent.getStringExtra("filter2").equals("one")){
-                            if (item.getCategory().trim().toLowerCase().equals(intent.getStringExtra("search").toLowerCase().trim()) && item.getLoc_name().toLowerCase().trim().equals(intent.getStringExtra("filter3").toLowerCase().trim())) {
+                        } else if (intent.getStringExtra("filter1").equals("category")
+                                && intent.getStringExtra("filter2").equals("one")){
+                            if (item.getCategory().trim().toLowerCase().equals(intent
+                                    .getStringExtra("search").toLowerCase().trim())
+                                    && item.getLoc_name().toLowerCase().trim()
+                                    .equals(intent.getStringExtra("filter3")
+                                            .toLowerCase().trim())) {
                                 items.add(item);
                             }
                         }
@@ -75,7 +87,8 @@ public class ViewItemsActivity extends AppCompatActivity {
                             items.add(item);
                         }
                     }
-                    ViewItemsActivity.CustomAdapter customAdapter1 = new ViewItemsActivity.CustomAdapter();
+                    ViewItemsActivity.CustomAdapter customAdapter1 =
+                            new ViewItemsActivity.CustomAdapter();
                     listView.setAdapter(customAdapter1);
                 }
             }
@@ -94,7 +107,7 @@ public class ViewItemsActivity extends AppCompatActivity {
             }
         });
     }
-    class CustomAdapter extends BaseAdapter {
+    public class CustomAdapter extends BaseAdapter {
         @Override
         public int getCount() {
             return items.size();
@@ -112,30 +125,25 @@ public class ViewItemsActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.individual_item_layout, parent, false);
+            convertView = getLayoutInflater()
+                    .inflate(R.layout.individual_item_layout, parent, false);
 
-            TextView nameOfItem = (TextView) convertView.findViewById(R.id.individual_item);
+            TextView nameOfItem = convertView.findViewById(R.id.individual_item);
             nameOfItem.setText(items.get(position).getItem_name());
 
-            TextView time = (TextView) convertView.findViewById(R.id.time_donation_came);
+            TextView time = convertView.findViewById(R.id.time_donation_came);
             time.setText(items.get(position).getTime_stamp());
 
-            TextView value = (TextView) convertView.findViewById(R.id.value_donation_came);
-            value.setText(items.get(position).getValueDollars());
-
-            TextView category = (TextView) convertView.findViewById(R.id.category_donation_came);
+            TextView category = convertView.findViewById(R.id.category_donation_came);
             category.setText(items.get(position).getCategory());
 
-            TextView shortDescription = (TextView) convertView.findViewById(R.id.shortDes_donation_came);
+            TextView shortDescription = convertView.findViewById(R.id.shortDes_donation_came);
             shortDescription.setText(items.get(position).getShortDes());
-
-            TextView fullDescription = (TextView) convertView.findViewById(R.id.fullDes_donation_came);
-            fullDescription.setText(items.get(position).getLongDes());
 
             return convertView;
         }
     }
-    public void onViewButtonPressed() {
+    protected void onViewButtonPressed() {
         Intent intent = new Intent(this, IndividualItemActivity.class);
         intent.putExtra("item", instanceItem);
         startActivity(intent);

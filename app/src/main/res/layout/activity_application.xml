@@ -34,7 +34,7 @@
         android:layout_marginRight="88dp"
         android:layout_marginStart="88dp"
         android:layout_marginTop="192dp"
-        android:text="@String/youmadeit"
+        android:text="@String/you_made_it"
         android:textColor="@android:color/black"
         android:textSize="25sp"
         android:textStyle="bold"

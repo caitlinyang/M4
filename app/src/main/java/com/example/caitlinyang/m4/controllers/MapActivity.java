@@ -29,7 +29,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private GoogleMap mMap;
     private DatabaseReference mDatabase;
     private List<Locations> locations;
-    private MapActivity mapActivity = this;
+    private final MapActivity mapActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +76,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         // Add a marker in Sydney and move the camera
         for (Locations instanceLoc : locations) {
-            LatLng instanceLatLng = new LatLng(instanceLoc.getLatitude(), instanceLoc.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(instanceLatLng).title(instanceLoc.getLocationName() + '\n' + instanceLoc.getPhoneNumber()`));
+            LatLng instanceLatLng =
+                    new LatLng(instanceLoc.getLatitude(), instanceLoc.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(instanceLatLng)
+                    .title(instanceLoc.getLocationName() + '\n' + instanceLoc.getPhoneNumber()));
         }
         Locations instanceLoc = locations.get(0);
         LatLng instanceLatLng = new LatLng(instanceLoc.getLatitude(), instanceLoc.getLongitude());

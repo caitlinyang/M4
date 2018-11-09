@@ -28,9 +28,7 @@
         app:itemIconTint="@color/darkgray"
         app:menu="@menu/user_drawer"
         app:headerLayout="@layout/header"
-        android:layout_gravity="start">
-
-    </android.support.design.widget.NavigationView>
+        android:layout_gravity="start"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

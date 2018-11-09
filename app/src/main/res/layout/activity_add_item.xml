@@ -27,7 +27,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newItem" />
+                android:hint="@string/item_name_input" />
 
             <TextView
                 android:id="@+id/newItem3"
@@ -36,7 +36,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="36dp"
-                android:text="New Item"
+                android:text="@string/new_item"
                 android:textColor="@android:color/black"
                 android:textSize="40sp"
                 android:textStyle="bold"
@@ -59,7 +59,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newItem" />
+                android:hint="@string/time_stamp_input" />
 
             <EditText
                 android:id="@+id/valueInput"
@@ -71,7 +71,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newItem" />
+                android:hint="@string/value_input" />
 
             <TextView
                 android:id="@+id/time_stamp"
@@ -80,7 +80,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/valueDollars"
                 android:layout_marginTop="228dp"
-                android:text="Time Stamp"
+                android:text="@string/time_stamp"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -94,7 +94,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/time_stamp"
                 android:layout_marginTop="148dp"
-                android:text="Item Name"
+                android:text="@string/item_name"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -108,7 +108,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="210dp"
                 android:layout_toStartOf="@+id/newItem3"
-                android:text="Value ($)"
+                android:text="@string/value"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -122,7 +122,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="130dp"
                 android:layout_toStartOf="@+id/newItem3"
-                android:text="Category"
+                android:text="@string/category"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -145,12 +145,11 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="22dp"
                 android:layout_marginEnd="34dp"
-                android:text="Next"
+                android:text="@string/next"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:onClick="next"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cancelRegistration"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
@@ -159,7 +158,7 @@
                 android:layout_height="48dp"
                 android:layout_alignStart="@+id/time_stamp"
                 android:layout_alignTop="@+id/nextAddItem"
-                android:text="ADD A CATEGORY"
+                android:text="@string/addCategory"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -175,11 +174,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/previous"
                 android:layout_marginEnd="35dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cancelRegistration"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
@@ -190,12 +188,11 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="24dp"
                 android:layout_marginStart="47dp"
-                android:text="Previous"
+                android:text="@string/previous"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:onClick="prev"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cancelRegistration"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
@@ -208,7 +205,8 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shortDes" />
+                app:layout_constraintTop_toBottomOf="@+id/shortDes"
+                android:hint="@string/fullDescription"/>
 
             <TextView
                 android:id="@+id/fullDesc"
@@ -217,7 +215,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/shortDesInput"
                 android:layout_marginTop="249dp"
-                android:text="Full Description"
+                android:text="@string/fullDescription"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -234,7 +232,8 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shortDes" />
+                app:layout_constraintTop_toBottomOf="@+id/shortDes"
+                android:hint="@string/shortDescription"/>
 
             <TextView
                 android:id="@+id/shortDes"
@@ -244,12 +243,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="21dp"
                 android:layout_marginTop="148dp"
-                android:text="Short Description (for display purposes)"
+                android:text="@string/shortDescription"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/time_stamp_input" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/newItem2"
@@ -258,7 +256,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="36dp"
-                android:text="New Item"
+                android:text="@string/new_item"
                 android:textColor="@android:color/black"
                 android:textSize="40sp"
                 android:textStyle="bold"

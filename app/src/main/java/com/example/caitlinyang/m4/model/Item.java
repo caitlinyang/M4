@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class Item implements Serializable{
-    public static final Item SPEC_ITEM = new Item();
+    private static final Item SPEC_ITEM = new Item();
 
     private String loc_name;
     private String item_name;

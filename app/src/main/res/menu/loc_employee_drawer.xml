@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/hp_loc_emp" android:title="Home Page" />
-    <item android:id="@+id/loclist_loc_emp" android:title="Locations List" />
-    <item android:id="@+id/logout_loc_emp" android:title="Logout" />
+    <item android:id="@+id/hp_loc_emp" android:title="@string/home" />
+    <item android:id="@+id/loclist_loc_emp" android:title="@string/locationsList" />
+    <item android:id="@+id/logout_loc_emp" android:title="@string/logout" />
 </menu>

@@ -11,32 +11,20 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
         android:text="@string/locations"
         android:textColor="@android:color/black"
         android:textSize="40sp"
         android:textStyle="bold"
         app:fontFamily="sans-serif"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="57dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/locationslist"
-        android:layout_width="368dp"
-        android:layout_height="455dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:divider="#f00"
-        android:dividerHeight="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="57dp" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view2"
@@ -48,7 +36,32 @@
         app:menu="@menu/user_drawer"
         app:headerLayout="@layout/header"
         android:layout_gravity="start">
-
     </android.support.design.widget.NavigationView>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/locationslist"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:divider="#f00"
+            android:dividerHeight="1dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/viewMaps"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button android:id="@+id/viewMaps"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/maps" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v4.widget.DrawerLayout>

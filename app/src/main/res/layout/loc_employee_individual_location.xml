@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="92dp"
-        android:text="TextView" />
+        android:text="@string/text_view" />
 
     <TextView
         android:id="@+id/textView_ind_location_longitude"
@@ -19,7 +19,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="150dp"
-        android:text="TextView" />
+        android:text="@string/text_view" />
 
     <TextView
         android:id="@+id/textView_ind_location_latitude"
@@ -29,7 +29,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="203dp"
-        android:text="TextView" />
+        android:text="@string/text_view" />
 
     <TextView
         android:id="@+id/textView_ind_location_address"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="240dp"
         android:layout_centerVertical="true"
-        android:text="TextView" />
+        android:text="@string/text_view" />
 
     <TextView
         android:id="@+id/textView_ind_location_phone_number"
@@ -47,7 +47,7 @@
         android:layout_alignStart="@+id/textView_ind_location_address"
         android:layout_alignLeft="@+id/textView_ind_location_address"
         android:layout_marginBottom="220dp"
-        android:text="TextView" />
+        android:text="@string/text_view" />
 
     <TextView
         android:textSize="20sp"
@@ -58,7 +58,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="31dp"
-        android:text="TextView" />
+        android:text="@string/text_view" />
 
 
 </RelativeLayout>

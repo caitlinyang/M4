@@ -52,9 +52,11 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
     private List<Locations> locations;
     private CustomAdapter customAdapter;
     private Locations instanceLoc;
+    private Button mapButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("TEST", "LocationScreen");
         mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
@@ -75,6 +77,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
         if (intent.hasExtra("key")) {
             user = (HashMap<String, Object>) intent.getSerializableExtra("key");
             Log.d("Test", (String) user.get("name"));
+        }
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -92,8 +95,13 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-        }
+        mapButton = (Button) findViewById(R.id.viewMaps);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent map = new Intent(getBaseContext(), MapActivity.class);
+                startActivity(map);
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -104,7 +112,6 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
                 onViewButtonPressed();
             }
         });
-
     }
 
     @Override
@@ -138,7 +145,6 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
 
         @Override
         public int getCount() {
-            //return SimpleModel.getInstance().getItems().get(SimpleModel.getInstance().getItems().size() - 1).getKey();
             return locations.size();
         }
 
@@ -154,7 +160,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.list_view_layout,null);
+            convertView = getLayoutInflater().inflate(R.layout.list_view_layout,parent, false);
 
             TextView locName = (TextView) convertView.findViewById(R.id.textView_location_name);
             TextView address = (TextView) convertView.findViewById(R.id.textView_address);
@@ -175,6 +181,7 @@ public class LocationScreenActivity extends AppCompatActivity implements Navigat
             intent.putExtra("location", instanceLoc);
         } else if (user.get("userType").equals("User")) {
             intent = new Intent(this, LocationActivity.class);
+            intent.putExtra("location", instanceLoc);
             intent.putExtra("key", user);
         }
         startActivity(intent);

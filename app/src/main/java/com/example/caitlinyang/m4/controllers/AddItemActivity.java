@@ -37,7 +37,7 @@ import java.util.Random;
 public class AddItemActivity extends AppCompatActivity implements DialogInterface.OnCancelListener {
 
     private ListView listView;
-    public static List<String> categories = new ArrayList<>();
+    private static List<String> categories = new ArrayList<>();
     private String categoryInput;
 
 //    private String loc_name;

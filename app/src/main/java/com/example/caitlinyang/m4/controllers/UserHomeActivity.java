@@ -106,7 +106,7 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        navigationView.bringToFront();
         final SearchView search = findViewById(R.id.search);
         search.setSubmitButtonEnabled(true);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
@@ -134,20 +134,19 @@ public class UserHomeActivity extends AppCompatActivity implements NavigationVie
                 return false;
             }
         });
-
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.loclist:
-                main = new Intent(getBaseContext(), LocationScreenActivity.class);
+                Log.d("TEST", "Testing");
+                main = new Intent(getApplicationContext(), LocationScreenActivity.class);
                 main.putExtra("key", user);
                 startActivity(main);
                 break;
             case R.id.hp:
-                Intent main2 = new Intent(getBaseContext(), UserHomeActivity.class);
+                Intent main2 = new Intent(getApplicationContext(), UserHomeActivity.class);
                 startActivity(main2);
                 break;
         }

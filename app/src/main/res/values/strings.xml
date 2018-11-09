@@ -5,5 +5,47 @@
     <string name="gallery" />
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="title_activity_map">Map</string>
+    <string name = "logout">LOGOUT</string>
+    <string name = "youmadeit">YOU MADE IT</string>
+    <string name = "login">LOGIN</string>
+    <string name = "usernameinput">usernameInput</string>
+    <string name = "passwordinput">passwordInput</string>
+    <string name = "username">username</string>
+    <string name = "password">password</string>
+    <string name = "cancel">CANCEL</string>
+    <string name = "welcome">WELCOME</string>
+    <string name = "register">REGISTER</string>
+    <string name = "registration">REGISTRATION</string>
+    <string name = "fullname">full name</string>
+    <string name = "registration_email">registration email</string>
+    <string name = "email">email</string>
+    <string name = "registration_password">registration password</string>
+    <string name = "usertype">user type</string>
+    <string name = "submit">SUBMIT</string>
+    <string name = "text_view">TextView</string>
+    <string name = "registration_full_name">registration full name</string>
+    <string name = "Item">Item</string>
+    <string name = "view_items">VIEW ITEMS</string>
+
+    <string name = "item_name_input">item name input</string>
+    <string name = "new_item">New Item</string>
+    <string name = "time_stamp_input">time stamp input</string>
+    <string name = "value_input">value input</string>
+    <string name = "time_stamp">Time Stamp</string>
+    <string name = "item_name">Item Name</string>
+    <string name = "value">Value ($)</string>
+    <string name = "category">Category</string>
+    <string name = "next">Next</string>
+    <string name = "addCategory">ADD A CATEGORY</string>
+    <string name = "previous">Previous</string>
+    <string name = "fullDescription">Full Description</string>
+    <string name = "shortDescription">Short Description</string>
+    <string name = "maps">View in Google Maps</string>
+    <string name = "home">Home Page</string>
+    <string name = "locationsList">Locations List</string>
+    <string name = "list_of_items">List of Items</string>
+
+
 
 </resources>

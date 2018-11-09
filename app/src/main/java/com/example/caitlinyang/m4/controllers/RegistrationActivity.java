@@ -90,6 +90,10 @@ public class RegistrationActivity extends AppCompatActivity{
                 final String userType = (String) userTypeSpinner.getSelectedItem();
 
                 User newUser = new User(name, email, password, userType);
+                registerUser(newUser, email);
+            }
+
+            public void registerUser(User newUser, String email) {
                 mDatabase.child("users").child(email).setValue(newUser);
                 Intent main = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 startActivity(main);

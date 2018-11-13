@@ -59,6 +59,7 @@ public class User implements Serializable{
         this.password = password;
         this.userType = userType;
         this.id = User.Next_Id + 1;
+        Next_Id++;
     }
 
 

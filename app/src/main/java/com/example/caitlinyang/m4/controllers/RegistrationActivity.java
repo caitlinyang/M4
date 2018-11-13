@@ -3,6 +3,7 @@ package com.example.caitlinyang.m4.controllers;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,10 +15,15 @@ import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+import com.google.firebase.database.DatabaseError;
+import android.support.annotation.NonNull;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class RegistrationActivity extends AppCompatActivity{
 
@@ -28,6 +34,7 @@ public class RegistrationActivity extends AppCompatActivity{
     private EditText userName;
     private EditText userEmail;
     private EditText userPassword;
+    private Map<String, Object> users;
     private static final List<String> userTypes = Arrays.asList("User",
             "Location Employee", "Admin");
 
@@ -45,7 +52,18 @@ public class RegistrationActivity extends AppCompatActivity{
                 new ArrayAdapter(this,android.R.layout.simple_spinner_item, userTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(adapter);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
+                users = (HashMap<String, Object>) data.get("users");
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         // cancel button going back to Welcome Screen
         cancelButton = findViewById(R.id.cancelRegistration);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -90,13 +108,15 @@ public class RegistrationActivity extends AppCompatActivity{
                 final String userType = (String) userTypeSpinner.getSelectedItem();
 
                 User newUser = new User(name, email, password, userType);
-                registerUser(newUser, email);
+                if (registerUser(email)) {
+                    mDatabase.child("users").child(email).setValue(newUser);
+                    Intent main = new Intent(getBaseContext(), WelcomeScreenActivity.class);
+                    startActivity(main);
+                }
             }
 
-            public void registerUser(User newUser, String email) {
-                mDatabase.child("users").child(email).setValue(newUser);
-                Intent main = new Intent(getBaseContext(), WelcomeScreenActivity.class);
-                startActivity(main);
+            public boolean registerUser(String email) {
+                return users.containsKey(email);
             }
         });
     }

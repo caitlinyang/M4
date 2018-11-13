@@ -1,7 +1,5 @@
 package com.example.caitlinyang.m4.controllers;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,14 +24,13 @@ import java.util.List;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    private DatabaseReference mDatabase;
     private List<Locations> locations;
     private final MapActivity mapActivity = this;
     private SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
@@ -50,7 +46,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 }
                 mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
-                mapFragment.getMapAsync(mapActivity);
+                if (mapFragment != null) {
+                    mapFragment.getMapAsync(mapActivity);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -74,6 +72,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        GoogleMap mMap;
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera

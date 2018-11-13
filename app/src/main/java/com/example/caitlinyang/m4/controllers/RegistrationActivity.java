@@ -1,9 +1,7 @@
 package com.example.caitlinyang.m4.controllers;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,18 +22,19 @@ import java.util.List;
 public class RegistrationActivity extends AppCompatActivity{
 
     private Spinner userTypeSpinner;
-    private Button submitButton;
-    private Button cancelButton;
+
     private DatabaseReference mDatabase;
 
     private EditText userName;
     private EditText userEmail;
     private EditText userPassword;
-    private final static List<String> userTypes = Arrays.asList("User",
+    private static final List<String> userTypes = Arrays.asList("User",
             "Location Employee", "Admin");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button submitButton;
+        Button cancelButton;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
@@ -67,19 +66,19 @@ public class RegistrationActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                if (userName.getText().toString().trim().equals("")) {
+                if ("".equals(userName.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(),
                             "Please enter a full name",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (userEmail.getText().toString().trim().equals("")) {
+                if ("".equals(userEmail.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(),
                             "Please enter an email",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (userPassword.getText().toString().trim().equals("")) {
+                if ("".equals(userPassword.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(),
                             "Please enter a password",Toast.LENGTH_SHORT).show();
                     return;
@@ -94,7 +93,7 @@ public class RegistrationActivity extends AppCompatActivity{
                 registerUser(newUser, email);
             }
 
-            protected void registerUser(User newUser, String email) {
+            public void registerUser(User newUser, String email) {
                 mDatabase.child("users").child(email).setValue(newUser);
                 Intent main = new Intent(getBaseContext(), WelcomeScreenActivity.class);
                 startActivity(main);

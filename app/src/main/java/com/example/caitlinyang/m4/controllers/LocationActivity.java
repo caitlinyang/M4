@@ -14,11 +14,11 @@ import com.example.caitlinyang.m4.model.Locations;
 
 public class LocationActivity extends AppCompatActivity {
 
-    private ListView listView;
     private Locations location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ListView listView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         Intent intent = getIntent();

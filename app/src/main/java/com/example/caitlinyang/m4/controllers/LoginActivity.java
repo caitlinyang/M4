@@ -22,13 +22,12 @@ import java.util.HashMap;
 public class LoginActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
-    private EditText userEmail;
-    private EditText userPassword;
-    private DatabaseReference mDatabase;
+
     private HashMap<String, Object> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -37,16 +36,12 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.passwordInput);
         Button loginButton = findViewById(R.id.loginAccess);
 
-        userEmail = findViewById(R.id.registration_email);
-        userPassword = findViewById(R.id.registration_password);
-
         Log.d("TEST", "Login Activity reached");
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
-                Log.d("TEST", data.get("users").toString());
                 users = (HashMap<String, Object>) data.get("users");
             }
 

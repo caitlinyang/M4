@@ -52,44 +52,44 @@ public class ViewItemsActivity extends AppCompatActivity {
                     Item item = snapshot.getValue(Item.class);
                     if (intent.hasExtra("filter1")) {
                         if ("item".equals(intent.getStringExtra("filter1"))
-                                && intent.getStringExtra("filter2").equals("all")) {
-                            if (item != null
-                                    && item.getItem_name().trim().toLowerCase()
+                                && "all".equals(intent.getStringExtra("filter2"))) {
+                            if ((item != null)
+                                    && (item.getItem_name().trim().toLowerCase()
                                     .equals(intent.getStringExtra("search")
-                                            .toLowerCase().trim())) {
+                                            .toLowerCase().trim()))) {
                                 items.add(item);
                             }
-                        } else if (intent.getStringExtra("filter1").equals("category")
-                                && intent.getStringExtra("filter2").equals("all")){
-                            if (item != null
-                                    && item.getCategory().trim().toLowerCase().equals(intent
-                                    .getStringExtra("search").toLowerCase().trim())) {
+                        } else if ("category".equals(intent.getStringExtra("filter1"))
+                                && "all".equals(intent.getStringExtra("filter2"))){
+                            if ((item != null)
+                                    && (item.getCategory().trim().toLowerCase().equals(intent
+                                    .getStringExtra("search").toLowerCase().trim()))) {
                                 items.add(item);
                             }
-                        } else if (intent.getStringExtra("filter1").equals("item")
-                                && intent.getStringExtra("filter2").equals("one")) {
-                            if (item != null
-                                    && item.getItem_name().trim().toLowerCase().equals(intent
+                        } else if ("item".equals(intent.getStringExtra("filter1"))
+                                && "one".equals(intent.getStringExtra("filter2"))) {
+                            if ((item != null)
+                                    && (item.getItem_name().trim().toLowerCase().equals(intent
                                     .getStringExtra("search").toLowerCase().trim())
                                     && item.getLoc_name().toLowerCase().trim().equals(intent
-                                    .getStringExtra("filter3").toLowerCase().trim())) {
+                                    .getStringExtra("filter3").toLowerCase().trim()))) {
                                 items.add(item);
                             }
-                        } else if (intent.getStringExtra("filter1").equals("category")
-                                && intent.getStringExtra("filter2").equals("one")){
-                            if (item != null
-                                    && item.getCategory().trim().toLowerCase().equals(intent
+                        } else if ("category".equals(intent.getStringExtra("filter1"))
+                                && "one".equals(intent.getStringExtra("filter2"))){
+                            if ((item != null)
+                                    && (item.getCategory().trim().toLowerCase().equals(intent
                                     .getStringExtra("search").toLowerCase().trim())
                                     && item.getLoc_name().toLowerCase().trim()
                                     .equals(intent.getStringExtra("filter3")
-                                            .toLowerCase().trim())) {
+                                            .toLowerCase().trim()))) {
                                 items.add(item);
                             }
                         }
                     }
                     else {
-                        if (item != null
-                            && item.getLoc_name().equals(location.getLocationName())) {
+                        if ((item != null)
+                            && (item.getLoc_name().equals(location.getLocationName()))) {
                             items.add(item);
                         }
                     }

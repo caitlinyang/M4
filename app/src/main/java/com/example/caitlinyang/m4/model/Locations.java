@@ -1,11 +1,8 @@
 package com.example.caitlinyang.m4.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Locations implements Serializable {
-    private static final Locations SPEC_LOCATION = new Locations();
 
     private String locationName;
     private String locationType;
@@ -13,6 +10,7 @@ public class Locations implements Serializable {
     private double latitude;
     private String address;
     private String phoneNumber;
+    private int key;
 
     public Locations() {
     }
@@ -25,6 +23,7 @@ public class Locations implements Serializable {
         this.latitude = latitude;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.key = key;
     }
 
     public String getLocationName() {

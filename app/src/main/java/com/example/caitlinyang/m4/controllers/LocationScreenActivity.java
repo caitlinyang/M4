@@ -42,7 +42,6 @@ public class LocationScreenActivity extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private DatabaseReference mDatabase;
-    private HashMap<String, Object> users;
     private HashMap<String, Object> user;
     private List<Locations> locations;
     private CustomAdapter customAdapter;
@@ -131,10 +130,7 @@ public class LocationScreenActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return toggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     class CustomAdapter extends BaseAdapter {
@@ -172,10 +168,10 @@ public class LocationScreenActivity extends AppCompatActivity
 
     private void onViewButtonPressed() {
         Intent intent = null;
-        if (user.get("userType").equals("Location Employee")) {
+        if ("Location Employee".equals(user.get("userType"))) {
             intent = new Intent(this, LocEmployeeLocationsActivity.class);
             intent.putExtra("location", instanceLoc);
-        } else if (user.get("userType").equals("User")) {
+        } else if ("User".equals(user.get("userType"))) {
             intent = new Intent(this, LocationActivity.class);
             intent.putExtra("location", instanceLoc);
             intent.putExtra("key", user);

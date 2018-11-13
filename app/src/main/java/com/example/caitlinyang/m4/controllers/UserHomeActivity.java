@@ -9,9 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Locations;
-import com.example.caitlinyang.m4.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,9 +38,9 @@ public class UserHomeActivity extends AppCompatActivity
     private Spinner filter2;
     private Spinner filter3;
     private List<String> locations;
-    private final static List<String> filter1list =
+    private static final List<String> filter1list =
             Arrays.asList("Search By Item", "Search By Category");
-    private final static List<String> filter2list =
+    private static final List<String> filter2list =
             Arrays.asList("Search All Locations", "Search Specific Location");
     private final UserHomeActivity activity = this;
 
@@ -74,7 +71,9 @@ public class UserHomeActivity extends AppCompatActivity
                 locations.add("N/A");
                 for (DataSnapshot snapshot : data.getChildren()) {
                     Locations location = snapshot.getValue(Locations.class);
-                    locations.add(location.getLocationName());
+                    if (location != null) {
+                        locations.add(location.getLocationName());
+                    }
                 }
                 ArrayAdapter<String> adapter3 = new ArrayAdapter(activity,
                         android.R.layout.simple_spinner_item, locations);
@@ -101,7 +100,9 @@ public class UserHomeActivity extends AppCompatActivity
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
@@ -154,9 +155,6 @@ public class UserHomeActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return toggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 }

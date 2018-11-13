@@ -28,8 +28,6 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.location_information);
 
-
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         Button addItem = findViewById(R.id.add_item);
         Intent intent = getIntent();
         if (intent.hasExtra("location")) {

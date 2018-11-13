@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +29,7 @@ import java.util.List;
 
 public class AddItemActivity extends AppCompatActivity implements DialogInterface.OnCancelListener {
 
-    private final static List<String> categories = new ArrayList<>();
+    private static final List<String> categories = new ArrayList<>();
     private String categoryInput;
     private Spinner categorySpinner;
     private EditText nameInput;

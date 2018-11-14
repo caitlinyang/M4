@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * AddItemActivity
+ */
 public class AddItemActivity extends AppCompatActivity implements DialogInterface.OnCancelListener {
 
     private static final List<String> categories = new ArrayList<>();
@@ -42,6 +45,10 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
     private DatabaseReference mDatabase;
     private Locations location;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,35 +151,71 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         });
     }
 
+    /**
+     * onCancel method
+     * @param dialog DialogInterface dialog
+     */
     @Override
     public void onCancel(DialogInterface dialog) {
     }
 
+    /**
+     * prev method
+     * @param view View view
+     */
     public void prev(View view) {
         viewFlipper.showPrevious();
     }
 
+    /**
+     * flips viewflipper method
+     * @param view view to pass in
+     */
     public void next(View view) {
         viewFlipper.showNext();
     }
 
+    /**
+     * CustomAdapter class
+     */
     private class CustomAdapter extends BaseAdapter {
 
+        /**
+         * gets count
+         * @return count
+         */
         @Override
         public int getCount() {
             return 1;
         }
 
+        /**
+         * getItem method
+         * @param position position in adapter
+         * @return null
+         */
         @Override
         public Object getItem(int position) {
             return null;
         }
 
+        /**
+         * getItemID Method
+         * @param position position in adapter
+         * @return 0
+         */
         @Override
         public long getItemId(int position) {
             return 0;
         }
 
+        /**
+         * GetView Method
+         * @param position position in adapter
+         * @param convertView convertView object
+         * @param parent ViewGroup parent
+         * @return view for adapter
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View newView = getLayoutInflater()

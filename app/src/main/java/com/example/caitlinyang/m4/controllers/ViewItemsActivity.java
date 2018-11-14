@@ -24,6 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ViewItemsActivity
+ */
 public class ViewItemsActivity extends AppCompatActivity {
 
     private List<Item> items;
@@ -32,6 +35,10 @@ public class ViewItemsActivity extends AppCompatActivity {
     private Intent intent;
     private Locations location;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -43,6 +50,10 @@ public class ViewItemsActivity extends AppCompatActivity {
             location = (Locations) intent.getSerializableExtra("location");
         }
         mDatabase.addValueEventListener(new ValueEventListener() {
+            /**
+             * onDataChange method
+             * @param dataSnapshot DataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 items = new ArrayList<>();
@@ -99,11 +110,22 @@ public class ViewItemsActivity extends AppCompatActivity {
                 }
             }
 
+            /**
+             * onCancelled method
+             * @param databaseError DatabaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * onItemClick method
+             * @param parent AdapterView
+             * @param view View
+             * @param position int
+             * @param id long
+             */
             @Override
             public void onItemClick (AdapterView < ? > parent, View view,int position, long id){
                 listView.setSelected(true);
@@ -113,22 +135,48 @@ public class ViewItemsActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * CustomAdapter class
+     */
     protected class CustomAdapter extends BaseAdapter {
+
+        /**
+         * gets count
+         * @return count
+         */
         @Override
         public int getCount() {
             return items.size();
         }
 
+        /**
+         * getItem method
+         * @param position position in adapter
+         * @return null
+         */
         @Override
         public Object getItem(int position) {
             return null;
         }
 
+        /**
+         * getItemID Method
+         * @param position position in adapter
+         * @return 0
+         */
         @Override
         public long getItemId(int position) {
             return 0;
         }
 
+        /**
+         * GetView Method
+         * @param position position in adapter
+         * @param convertView convertView object
+         * @param parent ViewGroup parent
+         * @return view for adapter
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View newView = getLayoutInflater()
@@ -149,6 +197,10 @@ public class ViewItemsActivity extends AppCompatActivity {
             return newView;
         }
     }
+
+    /**
+     * onViewButtonPressed method
+     */
     private void onViewButtonPressed() {
         Intent intent = new Intent(this, IndividualItemActivity.class);
         intent.putExtra("item", instanceItem);

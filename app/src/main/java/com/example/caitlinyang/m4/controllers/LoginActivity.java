@@ -20,12 +20,19 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
+/**
+ * LoginActivity
+ */
 public class LoginActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
 
     private HashMap<String, Object> users;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DatabaseReference mDatabase;
@@ -40,12 +47,20 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("TEST", "Login Activity reached");
 
         mDatabase.addValueEventListener(new ValueEventListener() {
+            /**
+             * onDataChange method
+             * @param dataSnapshot DataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
                 users = (HashMap<String, Object>) data.get("users");
             }
 
+            /**
+             * onCancelled method
+             * @param databaseError DatabaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -54,6 +69,10 @@ public class LoginActivity extends AppCompatActivity {
 
         //Need to wait for database to populate first before clicking rn
         loginButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
                 boolean found = checkRegistration() != null;
@@ -70,6 +89,10 @@ public class LoginActivity extends AppCompatActivity {
         // Cancel Button goes back to the welcome screen if cancel is hit
         Button cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
                 Intent welcome = new Intent(getBaseContext(), WelcomeScreenActivity.class);
@@ -78,6 +101,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * checkRegistration method
+     * @return Hashmap<String, Object>
+     */
     protected HashMap<String, Object> checkRegistration() {
         for (String key : users.keySet()) {
             HashMap<String, Object> user = (HashMap<String, Object>) users.get(key);

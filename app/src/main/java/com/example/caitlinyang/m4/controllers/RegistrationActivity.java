@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * RegistrationActivity
+ */
 public class RegistrationActivity extends AppCompatActivity{
 
     private Spinner userTypeSpinner;
@@ -38,6 +41,10 @@ public class RegistrationActivity extends AppCompatActivity{
     private static final List<String> userTypes = Arrays.asList("User",
             "Location Employee", "Admin");
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Button submitButton;
@@ -53,12 +60,20 @@ public class RegistrationActivity extends AppCompatActivity{
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(adapter);
         mDatabase.addValueEventListener(new ValueEventListener() {
+            /**
+             * onDataChange method
+             * @param dataSnapshot DataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
                 users = (HashMap<String, Object>) data.get("users");
             }
 
+            /**
+             * onCancelled method
+             * @param databaseError DatabaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -81,6 +96,10 @@ public class RegistrationActivity extends AppCompatActivity{
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
 
@@ -115,6 +134,11 @@ public class RegistrationActivity extends AppCompatActivity{
                 }
             }
 
+            /**
+             * registerUser method
+             * @param email String
+             * @return boolean true or false
+             */
             public boolean registerUser(String email) {
                 return users.containsKey(email);
             }

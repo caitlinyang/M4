@@ -22,12 +22,19 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MapActivity
+ */
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private List<Locations> locations;
     private final MapActivity mapActivity = this;
     private SupportMapFragment mapFragment;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DatabaseReference mDatabase;
@@ -35,6 +42,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         mDatabase.addValueEventListener(new ValueEventListener() {
+            /**
+             * onDataChange method
+             * @param dataSnapshot DataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 locations = new ArrayList<>();
@@ -50,6 +61,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                     mapFragment.getMapAsync(mapActivity);
                 }
             }
+            /**
+             * onCancelled method
+             * @param databaseError DatabaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }

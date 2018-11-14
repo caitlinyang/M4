@@ -10,9 +10,15 @@ import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.controllers.LoginActivity;
 import com.example.caitlinyang.m4.controllers.RegistrationActivity;
 
-
+/**
+ * WelcomeScreenActivity
+ */
 public class WelcomeScreenActivity extends AppCompatActivity {
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +28,10 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         // when the login button is clicked, it switches the view to the Login screen
         Button loginPageButton = findViewById(R.id.loginButton);
         loginPageButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), LoginActivity.class);
@@ -30,6 +40,10 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         });
         Button registrationPageButton = findViewById(R.id.registerButton);
         registrationPageButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), RegistrationActivity.class);

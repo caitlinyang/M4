@@ -28,6 +28,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * UserHomeActivity
+ */
 public class UserHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,6 +47,10 @@ public class UserHomeActivity extends AppCompatActivity
             Arrays.asList("Search All Locations", "Search Specific Location");
     private final UserHomeActivity activity = this;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -63,6 +70,10 @@ public class UserHomeActivity extends AppCompatActivity
         filter1.setAdapter(adapter1);
         filter2.setAdapter(adapter2);
         mDatabase.addValueEventListener(new ValueEventListener() {
+            /**
+             * onDataChange method
+             * @param dataSnapshot DataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 locations = new ArrayList<>();
@@ -80,6 +91,10 @@ public class UserHomeActivity extends AppCompatActivity
                 adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 filter3.setAdapter(adapter3);
             }
+            /**
+             * onCancelled method
+             * @param databaseError DatabaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -109,6 +124,11 @@ public class UserHomeActivity extends AppCompatActivity
         final SearchView search = findViewById(R.id.search);
         search.setSubmitButtonEnabled(true);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            /**
+             * onQueryTextSubmit method
+             * @param s String
+             * @return boolean true or false
+             */
             @Override
             public boolean onQueryTextSubmit(String s) {
                 Intent main = new Intent(getBaseContext(), ViewItemsActivity.class);
@@ -127,6 +147,12 @@ public class UserHomeActivity extends AppCompatActivity
                 startActivity(main);
                 return true;
             }
+
+            /**
+             * onQueryTextChange method
+             * @param s String
+             * @return false
+             */
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
@@ -134,6 +160,11 @@ public class UserHomeActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * onNavigationItemSelected method
+     * @param item MenuItem
+     * @return boolean true or false
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent main;
@@ -153,6 +184,11 @@ public class UserHomeActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * onOptionsItemSelected method
+     * @param item MenuItem
+     * @return boolean true or false.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return toggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);

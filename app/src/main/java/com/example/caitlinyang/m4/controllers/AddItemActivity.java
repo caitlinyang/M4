@@ -91,6 +91,10 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
         // Goes to create a category screen
         Button createCategory = findViewById(R.id.add_category);
         createCategory.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View v
+             */
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddItemActivity.this);
@@ -120,6 +124,10 @@ public class AddItemActivity extends AppCompatActivity implements DialogInterfac
 
         Button submitItem = findViewById(R.id.submitItem);
         submitItem.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View v
+             */
             @Override
             public void onClick(View v) {
                 if ("".equals(nameInput.getText().toString().trim())

@@ -50,6 +50,8 @@ public class Locations implements Serializable {
         return phoneNumber;
     }
 
+    public int getKey() { return key;}
+
     @Override
     public String toString() {
         return "Locations{" +

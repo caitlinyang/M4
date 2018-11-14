@@ -34,6 +34,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * LocationScreenActivity
+ */
 public class LocationScreenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,6 +50,10 @@ public class LocationScreenActivity extends AppCompatActivity
     private CustomAdapter customAdapter;
     private Locations instanceLoc;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState Bundle savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("TEST", "LocationScreen");
@@ -76,6 +83,10 @@ public class LocationScreenActivity extends AppCompatActivity
             Log.d("Test", (String) user.get("name"));
         }
         mDatabase.addValueEventListener(new ValueEventListener() {
+            /**
+             * onDataChange method
+             * @param dataSnapshot Datasnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 locations = new ArrayList<>();
@@ -88,19 +99,36 @@ public class LocationScreenActivity extends AppCompatActivity
                 customAdapter = new CustomAdapter();
                 listView.setAdapter(customAdapter);
             }
+
+            /**
+             * onCancelled Method
+             * @param databaseError databaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
         Button mapButton = findViewById(R.id.viewMaps);
         mapButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View v
+             */
             @Override
             public void onClick(View v) {
                 Intent map = new Intent(getBaseContext(), MapActivity.class);
                 startActivity(map);
             }
         });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * onItemClick method
+             * @param parent parent AdapterView
+             * @param view View view
+             * @param position position
+             * @param id id
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listView.setSelected(true);
@@ -112,6 +140,11 @@ public class LocationScreenActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * onNavigationItemSelected method
+     * @param item MenuItem
+     * @return boolean
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -130,28 +163,57 @@ public class LocationScreenActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * onOptionsItemSelected method
+     * @param item menu item
+     * @return boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return toggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
+    /**
+     * CustomAdapter class
+     */
     class CustomAdapter extends BaseAdapter {
 
+        /**
+         * getCount method
+         * @return locations size
+         */
         @Override
         public int getCount() {
             return locations.size();
         }
 
+        /**
+         * getItem method
+         * @param position position
+         * @return null
+         */
         @Override
         public Object getItem(int position) {
             return null;
         }
 
+        /**
+         * getItemId method
+         * @param position position
+         * @return long
+         */
         @Override
         public long getItemId(int position) {
             return 0;
         }
 
+        /**
+         * getView method
+         * @param position position
+         * @param convertView convertView
+         * @param parent parent
+         * @return view
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View newView = getLayoutInflater().inflate(R.layout.list_view_layout,parent, false);
@@ -168,6 +230,9 @@ public class LocationScreenActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * onViewButtonPressed Method
+     */
     private void onViewButtonPressed() {
         Intent intent = null;
         if ("Location Employee".equals(user.get("userType"))) {
@@ -182,6 +247,10 @@ public class LocationScreenActivity extends AppCompatActivity
     }
 
 
+    /**
+     * readLocationData method
+     * @return boolean
+     */
     private boolean readLocationData() {
 
         InputStream inputStream = getResources().openRawResource(R.raw.locationdata);

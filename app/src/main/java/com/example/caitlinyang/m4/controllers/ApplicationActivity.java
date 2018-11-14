@@ -8,7 +8,15 @@ import android.widget.Button;
 
 import com.example.caitlinyang.m4.R;
 
+/**
+ * Application Activity
+ */
 public class ApplicationActivity extends AppCompatActivity {
+
+    /**
+     * onCreate method
+     * @param savedInstanceState Bundle savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

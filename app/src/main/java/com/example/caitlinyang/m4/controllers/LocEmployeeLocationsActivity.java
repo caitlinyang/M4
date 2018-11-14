@@ -16,11 +16,17 @@ import com.example.caitlinyang.m4.model.Locations;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
+/**
+ *LocEmployeeLocationsActivity class
+ */
 public class LocEmployeeLocationsActivity extends AppCompatActivity {
 
     private Locations location;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,10 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
             Log.d("TEST", location.getLocationName());
         }
         addItem.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View v
+             */
             @Override
             public void onClick(View v) {
                 Intent main = new Intent(getBaseContext(), AddItemActivity.class);
@@ -47,6 +57,10 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
         Button viewItem = findViewById(R.id.view_items);
 
         viewItem.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param v View v
+             */
             @Override
             public void onClick(View v) {
                 Intent main = new Intent(getBaseContext(), ViewItemsActivity.class);
@@ -59,24 +73,47 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
         listView.setAdapter(customAdapter);
     }
 
-
+    /**
+     * customAdapter class
+     */
     class CustomAdapter extends BaseAdapter {
 
+        /**
+         * getcount method
+         * @return 1
+         */
         @Override
         public int getCount() {
             return 1;
         }
 
+        /**
+         * getItem method
+         * @param position position
+         * @return null
+         */
         @Override
         public Object getItem(int position) {
             return null;
         }
 
+        /**
+         * getItemId method
+         * @param position position
+         * @return 0
+         */
         @Override
         public long getItemId(int position) {
             return 0;
         }
 
+        /**
+         * getView method
+         * @param position position
+         * @param convertView convertView
+         * @param parent ViewGroup
+         * @return view
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View newView = getLayoutInflater()

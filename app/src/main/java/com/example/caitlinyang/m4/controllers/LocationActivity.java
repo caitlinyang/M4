@@ -12,10 +12,17 @@ import android.widget.TextView;
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Locations;
 
+/**
+ * LocationActivity
+ */
 public class LocationActivity extends AppCompatActivity {
 
     private Locations location;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ListView listView;
@@ -31,23 +38,46 @@ public class LocationActivity extends AppCompatActivity {
         listView.setAdapter(customAdapter);
     }
 
+    /**
+     * customAdapter class
+     */
     class CustomAdapter extends BaseAdapter {
-
+        /**
+         * getCount method
+         * @return count
+         */
         @Override
         public int getCount() {
             return 1;
         }
 
+        /**
+         * getItem method
+         * @param position position
+         * @return Object
+         */
         @Override
         public Object getItem(int position) {
             return null;
         }
 
+        /**
+         * getItemId method
+         * @param position position
+         * @return 0
+         */
         @Override
         public long getItemId(int position) {
             return 0;
         }
 
+        /**
+         * getView method
+         * @param position position
+         * @param convertView convertView
+         * @param parent ViewGroup parent
+         * @return
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View newView = getLayoutInflater()

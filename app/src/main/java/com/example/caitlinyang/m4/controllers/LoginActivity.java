@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.caitlinyang.m4.R;
+import com.example.caitlinyang.m4.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,20 +56,12 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean found = false;
-                for (String key : users.keySet()) {
-                    HashMap<String, Object> user = (HashMap<String, Object>) users.get(key);
-                    if(username.getText().toString().trim().toLowerCase()
-                            .equals(user.get("email")) && password.getText()
-                            .toString().equals(user.get("password"))) {
-                        Log.d("TEST", "hi");
-                        Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
-                        main.putExtra("key", user);
-                        startActivity(main);
-                        found = true;
-                        }
-                }
-                if (!found) {
+                boolean found = checkRegistration() != null;
+                if (found) {
+                    Intent main = new Intent(getBaseContext(), UserHomeActivity.class);
+                    main.putExtra("key", checkRegistration());
+                    startActivity(main);
+                } else {
                     Toast.makeText(getApplicationContext(),
                             "Wrong Credentials",Toast.LENGTH_SHORT).show();
                 }
@@ -84,5 +77,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+    protected HashMap<String, Object> checkRegistration() {
+        for (String key : users.keySet()) {
+            HashMap<String, Object> user = (HashMap<String, Object>) users.get(key);
+            if(username.getText().toString().trim().toLowerCase()
+                    .equals(user.get("email")) && password.getText()
+                    .toString().equals(user.get("password"))) {
+                Log.d("TEST", "hi");
+                return user;
+            }
+        }
+        return null;
     }
 }

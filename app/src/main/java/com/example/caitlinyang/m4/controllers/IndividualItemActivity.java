@@ -12,9 +12,16 @@ import android.widget.TextView;
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Item;
 
+/**
+ * IndividualItemActivity class
+ */
 public class IndividualItemActivity extends AppCompatActivity {
     private Item item;
 
+    /**
+     * creates individual item activity
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ListView listView;
@@ -33,23 +40,46 @@ public class IndividualItemActivity extends AppCompatActivity {
         listView.setAdapter(customAdapter);
     }
 
+    /**
+     * CustomAdapter
+     */
     class CustomAdapter extends BaseAdapter {
-
+        /**
+         * gets count
+         * @return count
+         */
         @Override
         public int getCount() {
             return 1;
         }
 
+        /**
+         * getItem method
+         * @param position position in adapter
+         * @return null
+         */
         @Override
         public Object getItem(int position) {
             return null;
         }
 
+        /**
+         * getItemID Method
+         * @param position position in adapter
+         * @return 0
+         */
         @Override
         public long getItemId(int position) {
             return 0;
         }
 
+        /**
+         * GetView Method
+         * @param position position in adapter
+         * @param convertView convertView object
+         * @param parent ViewGroup parent
+         * @return view for adapter
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View newView = getLayoutInflater()

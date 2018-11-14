@@ -66,7 +66,9 @@ public class LocationScreenActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view2);
         navigationView.setNavigationItemSelectedListener(this);
         
-        readLocationData();
+        if (readLocationData()) {
+            Log.d("TEST", "Locations logged");
+        }
         listView = findViewById(R.id.locations_list);
         Intent intent = getIntent();
         if (intent.hasExtra("key")) {
@@ -180,7 +182,7 @@ public class LocationScreenActivity extends AppCompatActivity
     }
 
 
-    private void readLocationData() {
+    private boolean readLocationData() {
 
         InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
         BufferedReader reader = new BufferedReader(
@@ -208,8 +210,10 @@ public class LocationScreenActivity extends AppCompatActivity
 
             }
             reader.close();
+            return true;
         } catch (IOException e) {
             Log.wtf("HomeScreenActivity", "Error reading data file on line " + line, e);
+            return false;
         }
     }
 

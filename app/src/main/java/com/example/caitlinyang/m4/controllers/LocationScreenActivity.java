@@ -85,7 +85,7 @@ public class LocationScreenActivity extends AppCompatActivity
         mDatabase.addValueEventListener(new ValueEventListener() {
             /**
              * onDataChange method
-             * @param dataSnapshot Datasnapshot
+             * @param dataSnapshot DataSnapshot
              */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

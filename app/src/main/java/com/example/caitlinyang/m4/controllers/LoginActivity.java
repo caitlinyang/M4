@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.caitlinyang.m4.R;
-import com.example.caitlinyang.m4.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -106,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
      * checkRegistration method
      * @return Hashmap<String, Object>
      */
-    protected HashMap<String, Object> checkRegistration() {
+    private java.io.Serializable checkRegistration() {
         for (String key : users.keySet()) {
             HashMap<String, Object> user = (HashMap<String, Object>) users.get(key);
             if(username.getText().toString().trim().toLowerCase()

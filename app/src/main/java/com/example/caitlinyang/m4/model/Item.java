@@ -42,7 +42,9 @@ public class Item implements Serializable{
         this.shortDes = shortDes;
         this.longDes = longDes;
         Random rand = new Random();
-        key = Integer.toString(rand.nextInt(100000));
+
+        int keyUpperBound = 100000;
+        key = Integer.toString(rand.nextInt(keyUpperBound));
     }
 
     /**

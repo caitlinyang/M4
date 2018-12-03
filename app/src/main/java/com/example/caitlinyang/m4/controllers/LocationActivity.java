@@ -33,7 +33,7 @@ public class LocationActivity extends AppCompatActivity {
             location = (Locations) intent.getSerializableExtra("location");
         }
         listView = findViewById(R.id.location_information);
-        CustomAdapter customAdapter = new CustomAdapter();
+        android.widget.ListAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
     }
@@ -76,7 +76,7 @@ public class LocationActivity extends AppCompatActivity {
          * @param position position
          * @param convertView convertView
          * @param parent ViewGroup parent
-         * @return
+         * @return View
          */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

@@ -34,7 +34,7 @@ public class IndividualItemActivity extends AppCompatActivity {
             item = (Item) intent.getSerializableExtra("item");
         }
         listView = findViewById(R.id.list_individual_items);
-        IndividualItemActivity.CustomAdapter customAdapter =
+        android.widget.ListAdapter customAdapter =
                 new IndividualItemActivity.CustomAdapter();
 
         listView.setAdapter(customAdapter);

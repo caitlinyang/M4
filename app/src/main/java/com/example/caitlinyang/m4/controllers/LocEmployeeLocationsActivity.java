@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import com.example.caitlinyang.m4.R;
 import com.example.caitlinyang.m4.model.Locations;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  *LocEmployeeLocationsActivity class
@@ -68,7 +66,7 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
                 startActivity(main);
             }
         });
-        LocEmployeeLocationsActivity.CustomAdapter customAdapter =
+        android.widget.ListAdapter customAdapter =
                 new LocEmployeeLocationsActivity.CustomAdapter();
         listView.setAdapter(customAdapter);
     }

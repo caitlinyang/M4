@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class AddItemActivity extends AppCompatActivity implements DialogInterface.OnCancelListener {
 
-    private static final List<String> categories = new ArrayList<>();
+    private static final java.util.Collection<String> categories = new ArrayList<>();
     private String categoryInput;
     private Spinner categorySpinner;
     private EditText nameInput;

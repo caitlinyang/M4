@@ -10,7 +10,7 @@ public class User implements Serializable{
      * allow us to assign unique id numbers to each student
      */
     @SuppressWarnings("CanBeFinal")
-    private static int Next_Id = 0;
+    private static int Next_Id;
 
     private final int id;
 
@@ -104,7 +104,7 @@ public class User implements Serializable{
         this.password = password;
         this.userType = userType;
         this.id = User.Next_Id + 1;
-        Next_Id++;
+        Next_Id += 1;
     }
 
 

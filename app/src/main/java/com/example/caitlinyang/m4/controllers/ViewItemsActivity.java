@@ -104,7 +104,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                             items.add(item);
                         }
                     }
-                    ViewItemsActivity.CustomAdapter customAdapter1 =
+                    android.widget.ListAdapter customAdapter1 =
                             new ViewItemsActivity.CustomAdapter();
                     listView.setAdapter(customAdapter1);
                 }
@@ -139,7 +139,7 @@ public class ViewItemsActivity extends AppCompatActivity {
     /**
      * CustomAdapter class
      */
-    protected class CustomAdapter extends BaseAdapter {
+    class CustomAdapter extends BaseAdapter {
 
         /**
          * gets count

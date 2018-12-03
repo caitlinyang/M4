@@ -218,9 +218,9 @@ public class LocationScreenActivity extends AppCompatActivity
         public View getView(int position, View convertView, ViewGroup parent) {
             View newView = getLayoutInflater().inflate(R.layout.list_view_layout,parent, false);
 
-            TextView locName = convertView.findViewById(R.id.textView_location_name);
-            TextView address = convertView.findViewById(R.id.textView_address);
-            TextView phoneNum = convertView.findViewById(R.id.textView_phone_number);
+            TextView locName = newView.findViewById(R.id.textView_location_name);
+            TextView address = newView.findViewById(R.id.textView_address);
+            TextView phoneNum = newView.findViewById(R.id.textView_phone_number);
 
             locName.setText(locations.get(position).getLocationName());
             address.setText("Address: " + locations.get(position).getAddress());

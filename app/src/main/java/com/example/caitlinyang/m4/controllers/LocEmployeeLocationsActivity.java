@@ -117,13 +117,13 @@ public class LocEmployeeLocationsActivity extends AppCompatActivity {
             View newView = getLayoutInflater()
                     .inflate(R.layout.loc_employee_individual_location, parent, false);
 
-            TextView locName = convertView.findViewById(R.id.textView_ind_location_name);
-            TextView locType = convertView.findViewById(R.id.textView_ind_location_type);
-            TextView address = convertView.findViewById(R.id.textView_ind_location_address);
-            TextView phoneNum = convertView.findViewById(R.id.textView_ind_location_phone_number);
+            TextView locName = newView.findViewById(R.id.textView_ind_location_name);
+            TextView locType = newView.findViewById(R.id.textView_ind_location_type);
+            TextView address = newView.findViewById(R.id.textView_ind_location_address);
+            TextView phoneNum = newView.findViewById(R.id.textView_ind_location_phone_number);
 
-            TextView lonText = convertView.findViewById(R.id.textView_ind_location_longitude);
-            TextView latText = convertView.findViewById(R.id.textView_ind_location_latitude);
+            TextView lonText = newView.findViewById(R.id.textView_ind_location_longitude);
+            TextView latText = newView.findViewById(R.id.textView_ind_location_latitude);
 
 
             locName.setText(location.getLocationName());
